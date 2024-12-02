@@ -1,0 +1,9 @@
+services:
+  trace-gen:
+    image: "python:3.7"
+    entrypoint: /bin/bash
+    working_dir: /app
+    tty: true
+    volumes:
+      - ./trace-generator:/app
+      - ./traces/alibaba/2018:/trace
