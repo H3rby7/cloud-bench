@@ -40,18 +40,11 @@ Exec into ocntainer
 
 ### Spar - Installation
 
-You can use the pre-packaged version via `pip` or run from the sources.
+Pre-packaged version will not work as the tool requires exact dependency versions.
 
 TODO: Provide actual sample data.
 
-#### Spar - Installing via pip
-
-    pip3 install spar
-    spar --help
-
-#### Spar - Running from source
-
-    pip install .
+    pip install -r requirements.txt
     python -m spar --help
 
 ### Spar - Genereting traces
@@ -59,4 +52,4 @@ TODO: Provide actual sample data.
 *Note: If you installed the tool using `pip` you can omit the `python -m` prefixes of each command.*
 
     mkdir -p /generated/tmp
-    python -m spar /generated/tmp --trace-dir /trace --duration 0.05
+    python -m spar /generated/tmp --trace-dir /trace --duration 0.5 --load-factor 5
