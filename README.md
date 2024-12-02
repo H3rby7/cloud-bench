@@ -1,6 +1,6 @@
 # Combine uBench and Spar
 
-Working with [Alibaba's cluster trace](https://github.com/H3rby7/alibaba-clusterdata)
+Working with [Alibaba's cluster trace](https://github.com/alibaba/clusterdata/tree/7358bbaf40778d4bd0464a64a430812088b7b74e)
 are [muBench](https://github.com/H3rby7/muBench)
 and [Spar](https://github.com/H3rby7/trace-generator)
 
@@ -10,14 +10,14 @@ To increase adoptability all commands are using docker ocntainers.
 
 ## Alibaba Trace
 
-[Alibaba 2018 Cluster Trace](https://github.com/alibaba/clusterdata/blob/fd54720dd2ab0a025534846ff9c42031417efb1c/cluster-trace-v2018/trace_2018.md)
+[Alibaba 2018 Cluster Trace](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/trace_2018.md)
 
 Fetches Alibaba Cluster Trace 2018 using a docker-compose variant of the
-['fetchData.sh'](https://github.com/alibaba/clusterdata/blob/fd54720dd2ab0a025534846ff9c42031417efb1c/cluster-trace-v2018/fetchData.sh)
+['fetchData.sh'](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/fetchData.sh)
 script.
 
 Checksum validation against the checksums provided in 
-['trace_2018.md'](https://github.com/alibaba/clusterdata/blob/fd54720dd2ab0a025534846ff9c42031417efb1c/cluster-trace-v2018/trace_2018.md).
+['trace_2018.md'](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/trace_2018.md).
 
     # Build a minimal docker container to download the trace
     docker-compose -f docker-compose-trace.yml up -d
