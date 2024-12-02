@@ -6,7 +6,7 @@ and [Spar](https://github.com/H3rby7/trace-generator)
 
 # Installation
 
-To increase adoptability all commands are using docker ocntainers.
+To increase adoptability all commands are using docker containers.
 
 ## Alibaba Trace
 
@@ -19,13 +19,17 @@ script.
 Checksum validation against the checksums provided in 
 ['trace_2018.md'](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/trace_2018.md).
 
-    # Build a minimal docker container to download the trace
+Build a minimal docker container and download the trace.
+(This will take a very long time as the hosting server is slow)
+
     docker-compose -f docker-compose-trace.yml up -d
 
-    # Inspect progress, if interested
+Inspect progress, if interested
+
     docker-compose -f docker-compose-trace.yml logs -f
 
-    # Exec into ocntainer
+Exec into ocntainer
+
     docker-compose -f docker-compose-trace.yml exec -it alibaba-trace bash
 
 ## Spar - Trace Generator
@@ -37,6 +41,8 @@ Checksum validation against the checksums provided in
 ### Spar - Installation
 
 You can use the pre-packaged version via `pip` or run from the sources.
+
+TODO: Provide actual sample data.
 
 #### Spar - Installing via pip
 
@@ -52,4 +58,5 @@ You can use the pre-packaged version via `pip` or run from the sources.
 
 *Note: If you installed the tool using `pip` you can omit the `python -m` prefixes of each command.*
 
-    python -m spar generated --duration 0.05
+    mkdir -p /generated/tmp
+    python -m spar /generated/tmp --trace-dir /trace --duration 0.05

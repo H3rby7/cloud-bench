@@ -7,3 +7,4 @@ services:
     volumes:
       - ./trace-generator:/app
       - ./traces/alibaba/2018:/trace
+      - ./generated:/generated

@@ -1,2 +1,4 @@
 **/*
 !.gitignore
+!sample_tasks.csv
+!sample_instances.csv
