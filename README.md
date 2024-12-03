@@ -14,12 +14,12 @@ Contents of the trace with 'used by' (refering to projects in use here.)
 
 File | Used by
 --- | ---
-machine_meta.tar.gz     | none
-container_meta.tar.gz   | none
+machine_meta.tar.gz     | none (download is commented out)
+container_meta.tar.gz   | none (download is commented out)
 batch_task.tar.gz       | [trace-generator](./trace-generator/)
-machine_usage.tar.gz    | none
+machine_usage.tar.gz    | none (download is commented out)
 batch_instance.tar.gz   | [trace-generator](./trace-generator/)
-container_usage.tar.gz  | none
+container_usage.tar.gz  | none (download is commented out)
 
 [Alibaba 2018 Cluster Trace](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/trace_2018.md)
 

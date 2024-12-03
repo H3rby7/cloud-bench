@@ -12,6 +12,12 @@ services:
       - /bin/bash
       - -c
       - |
+        echo "Downloading README for quick reference"
+        wget $${WGET_OPTS} https://github.com/alibaba/clusterdata/raw/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/trace_2018.md
+
+        echo "Downloading schema.txt for quick reference"
+        wget $${WGET_OPTS} https://github.com/alibaba/clusterdata/raw/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-v2018/schema.txt
+
         # Un-comment to download
         # wget $${WGET_OPTS} $${TRACE_URL_BASE}/machine_meta.tar.gz
         # echo "b5b1b786b22cd413a3674b8f2ebfb2f02fac991c95df537f363ef2797c8f6d55 machine_meta.tar.gz" | sha256sum -c
