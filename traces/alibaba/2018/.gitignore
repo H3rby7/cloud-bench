@@ -1,4 +1,4 @@
 **/*
 !.gitignore
-!sample_tasks.csv
-!sample_instances.csv
+# We comment the line below (sample data) -> so it is shipped with GIT, but changes to it do not appear in GIT.
+#!sample_*.csv
