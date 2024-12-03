@@ -129,3 +129,9 @@ Exec into ocntainer
 * Jobs consist of tasks
 * tasks (batch_task.csv) can have multiple instances (batch_instances.csv)
 * tasks can depend on other tasks
+
+# Development tips
+
+See full progress of docker-compose build
+
+    docker-compose build --progress plain
