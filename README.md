@@ -64,14 +64,20 @@ Exec into ocntainer
 
 Pre-packaged version will not work as the tool requires exact dependency versions.
 
-TODO: Provide actual sample data.
-
     pip install -r requirements.txt
+
+To get the same sample data as the original tool authors we can use their published 'spar' package:
+
+    pip install spar
+    # Generate Traces and move them to our input directory
+    cp /usr/local/lib/python3.7/site-packages/spar/data/samples/* /trace
+    echo "Y" | pip uninstall spar
+
+To use the mounted 'spar' version use
+
     python -m spar --help
 
 ### Spar - Genereting traces
-
-*Note: If you installed the tool using `pip` you can omit the `python -m` prefixes of each command.*
 
     mkdir -p /generated/tmp
     python -m spar /generated/tmp --trace-dir /trace --duration 0.5 --load-factor 5
