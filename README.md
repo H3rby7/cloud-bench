@@ -59,30 +59,34 @@ Exec into ocntainer
 
     docker-compose up trace-gen -d
     docker-compose exec trace-gen bash
-
-### Spar - Installation
-
-Pre-packaged version will not work as the tool requires exact dependency versions.
-
-    pip install -r requirements.txt
-
-To get the same sample data as the original tool authors we can use their published 'spar' package:
-
-    pip install spar
-    # Generate Traces and move them to our input directory
-    cp /usr/local/lib/python3.7/site-packages/spar/data/samples/* /trace
-    echo "Y" | pip uninstall spar
-
-To use the mounted 'spar' version use
-
     python -m spar --help
+
+### Spar - Traces
+
+The docker container has the original 'spar' 1-hour long trace within the directory:
+
+    /original-spar-1h-trace
+
+To access these from your local machine you may want to copy them into a mounted directory:
+
+    cp -r /original-spar-1h-trace /trace/
 
 ### Spar - Genereting traces
 
+Create an output directory:
+
     mkdir -p /generated/tmp
+
+Using the original sample data:
+
+    python -m spar /generated/tmp --trace-dir /original-spar-1h-trace
+
+Or use your own data from the mounted directory (and specify more options)
+
     python -m spar /generated/tmp --trace-dir /trace --duration 0.5 --load-factor 5
 
-TODO: We want proper sample data that spans over common cycles (hours, days, week) (seasons not supported as no longterm data is present)
+The original 'spar' data only spans over one hour. 
+Literature suggests that workload follows cycles, such as hours over a day and even months/seasons.
 
 ## Alibaba Microservices Trace 2021
 
