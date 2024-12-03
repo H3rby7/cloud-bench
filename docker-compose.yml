@@ -20,5 +20,14 @@ services:
     tty: true
     volumes:
       - ./trace-generator:/app
-      - ./traces/alibaba/2018:/trace
       - ./generated:/generated
+      - ./traces/alibaba/2018:/trace # Make downloaded alibaba trace avaliable (optional)
+
+  mubench:
+    image: "msvcbench/mubench@sha256:878ebc148159e1224334b0b09b7cf3393c1867c83782fa20f6a57714db7daf66"
+    entrypoint: /bin/bash
+    working_dir: /root/muBench
+    tty: true
+    volumes:
+      - ./generated:/generated
+      - ./traces/alibaba/2021-ms:/trace # Make downloaded alibaba trace avaliable (optional)
