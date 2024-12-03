@@ -41,13 +41,13 @@ By default will only download 'batch_xxx.tar.gz' files.
 
 Inspect progress, if interested
 
-    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace ls -lsh
+    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace-v2018 ls -lsh
     or
     docker-compose -f docker-compose-trace.yml logs -f
 
 Exec into ocntainer
 
-    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace bash
+    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace-v2018 bash
 
 ### Short info on trace data
 
@@ -75,3 +75,43 @@ TODO: Provide actual sample data.
 
     mkdir -p /generated/tmp
     python -m spar /generated/tmp --trace-dir /trace --duration 0.5 --load-factor 5
+
+## Alibaba Microservices Trace 2021
+
+Contents of the trace with 'used by' (refering to projects in use here.)
+
+File | Used by
+--- | ---
+machine_meta.tar.gz     | none (download is commented out)
+batch_task.tar.gz       | [muBench](./muBench/)
+
+[Alibaba 2021 Microservices Trace](https://github.com/alibaba/clusterdata/tree/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-microservices-v2021)
+
+### Download Trace Data
+
+Fetches Alibaba Cluster Trace 2018 using a docker-compose variant of the
+['fetchData.sh'](https://github.com/alibaba/clusterdata/blob/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-microservices-v2021/fetchData.sh)
+script.
+
+Build a minimal docker container and download the trace information.
+By default will only download 'batch_xxx.tar.gz' files.
+
+*Note: This will take a very long time as the hosting server is slow*
+
+    docker-compose -f docker-compose-trace.yml up -d
+
+Inspect progress, if interested
+
+    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace-ms-v2021 ls -lsh
+    or
+    docker-compose -f docker-compose-trace.yml logs -f
+
+Exec into ocntainer
+
+    docker-compose -f docker-compose-trace.yml exec -it alibaba-trace-ms-v2021 bash
+
+### Short info on trace data
+
+* Jobs consist of tasks
+* tasks (batch_task.csv) can have multiple instances (batch_instances.csv)
+* tasks can depend on other tasks
