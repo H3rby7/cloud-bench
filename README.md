@@ -12,6 +12,7 @@ Contents:
     - [Spar - Traces](#spar---traces)
     - [Spar - Genereting traces](#spar---genereting-traces)
   - [muBench - Demo Microservice Generator](#mubench---demo-microservice-generator)
+    - [muBench and Alibaba Trace 2021](#mubench-and-alibaba-trace-2021)
 - [Traces](#traces)
   - [Alibaba Trace 2018](#alibaba-trace-2018)
     - [Download Trace Data](#download-trace-data)
@@ -68,6 +69,20 @@ The resulting architecture can be deployed into Kubernetes and also be called vi
     docker-compose up mubench -d
     docker-compose exec -it mubench bash
 
+### muBench and Alibaba Trace 2021
+
+Their repository contains a [ZIP file](./muBench/examples/Alibaba/)
+with microservices that are derived from Alibaba Traces.
+
+Also the Matlab Code to produce the content [is available here](./muBench/examples/Alibaba/Matlab/allinone.m).
+
+TODO:
+We need the microservice DAG to feed muBench, however the results within the ZIP cannot be connected back to the LOAD on these MS.
+As we also need the LOAD for the MS we can use the Matlab Code again (or extract the proper IDs) to find the actual LOAD in the traces and use these to stress the http.
+
+THINKING: maybe we can use the code with the 2022 trace, as that trace runs over 13 days
+which give us the opportunity to cover the daily and weekly cycles in workload intensity.
+
 # Traces
 
 ## Alibaba Trace 2018
@@ -121,12 +136,12 @@ Exec into container
 
 Contents of the trace with 'used by' (refering to projects in use here.)
 
-Directory | Used by
---- | ---
-Node            | none
-MSResource      | none
-MSRTQps         | contains MS-Call traces, which we will combine with muBench to generate proper load
-MSCallGraph     | [muBench](./muBench/) (download is commented out, as muBench already has topologies)
+Directory | Content | Used by
+--- | --- | ---
+Node            |                   | none
+MSResource      |                   | none
+MSRTQps         | MS Return Times   | none
+MSCallGraph     | MS Call traces    | Load for MS Calls, [muBench](./muBench/)
 
 [Alibaba 2021 Microservices Trace](https://github.com/alibaba/clusterdata/tree/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-microservices-v2021)
 
