@@ -14,3 +14,11 @@ services:
     entrypoint: /trace/fetch.sh
     volumes:
       - ./alibaba/2021-ms:/trace
+
+  alibaba-trace-ms-v2022:
+    build:
+      dockerfile: ./wget.dockerfile
+    working_dir: /trace
+    entrypoint: /trace/fetch.sh start_date=0d0 end_date=0d1
+    volumes:
+      - ./alibaba/2022-ms:/trace
