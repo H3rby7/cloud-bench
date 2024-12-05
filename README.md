@@ -70,13 +70,6 @@ with microservices that are derived from Alibaba Traces.
 
 Also the Matlab Code to produce the content [is available here](./muBench/examples/Alibaba/Matlab/allinone.m).
 
-TODO:
-We need the microservice DAG to feed muBench, however the results within the ZIP cannot be connected back to the LOAD on these MS.
-As we also need the LOAD for the MS we can use the Matlab Code again (or extract the proper IDs) to find the actual LOAD in the traces and use these to stress the http.
-
-THINKING: maybe we can use the code with the 2022 trace, as that trace runs over 13 days
-which give us the opportunity to cover the daily and weekly cycles in workload intensity.
-
 # Traces
 
 See [Traces](./traces/)
