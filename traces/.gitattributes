@@ -1,0 +1,4 @@
+alibaba/2018/sample_tasks.csv filter=lfs diff=lfs merge=lfs -text
+alibaba/2018/sample_instances.csv filter=lfs diff=lfs merge=lfs -text
+
+*.sh eol=lf
