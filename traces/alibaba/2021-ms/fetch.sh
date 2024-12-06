@@ -11,8 +11,10 @@ wget ${WGET_OPTS} https://github.com/alibaba/clusterdata/raw/7358bbaf40778d4bd04
 mkdir -p MSCallGraph
 cd MSCallGraph
 
+# Index 0 to 144 are available...
 # for((i=0;i<=144;i++));
-for((i=0;i<=1;i++));
+# Detti et. al only use MSCallGraph_0
+for((i=0;i<=0;i++));
 do
   command="wget ${WGET_OPTS} ${TRACE_URL_BASE}/MSCallGraph/MSCallGraph_${i}.tar.gz"
   echo "Retrieving MSCallGraph Part ${i}/24..."
