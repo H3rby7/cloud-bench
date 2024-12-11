@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+      // Exclude system DIRs of external drive
+      "**/System Volume Information": true,
+      "**/$RECYCLE.BIN": true,
+  }
+}

@@ -11,6 +11,7 @@ Contents:
     - [Short info on trace data](#short-info-on-trace-data)
   - [Alibaba Microservices Trace 2021](#alibaba-microservices-trace-2021)
     - [Download Alibaba Trace Data MS 2021](#download-alibaba-trace-data-ms-2021)
+    - [Interseting findings](#interseting-findings)
   - [Alibaba Microservices Trace 2022](#alibaba-microservices-trace-2022)
     - [Download Alibaba Trace Data MS 2022](#download-alibaba-trace-data-ms-2022)
 - [Development tips](#development-tips)
@@ -83,6 +84,11 @@ By default will only download 'MSCallGraph' dir.
 
     docker-compose up alibaba-trace-ms-v2021
 
+### Interseting findings
+
+Traces may be recorded doubled. Example: 
+
+in `MSCallGraph_0.csv` the traces `22004` and `22005` of trace_id `0b13398a15919237330738000edeb5` describe the same call exactly.
 
 ## Alibaba Microservices Trace 2022
 
@@ -111,6 +117,17 @@ By default will only download 'CallGraph' dir.
     docker-compose up alibaba-trace-ms-v2022
 
 # Development tips
+
+Using only subsets of files 
+
+(e.g. only first 100K lines of a csv)
+
+    head -n 100000 MSCallGraph_0.csv > MSCallGraph_test.csv
+
+Start lates by adding header row and then skip
+
+    head -n 1 MSCallGraph_0.csv > MSCallGraph_test.csv
+    head -n 200000 MSCallGraph_0.csv | tail -n 100000 >> MSCallGraph_test.csv
 
 See full progress of docker-compose build
 

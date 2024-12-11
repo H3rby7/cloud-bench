@@ -1,0 +1,24 @@
+{
+   "WorkModelParameters":{
+      "ServiceGraphFilePath": {
+         "type": "metadata", 
+         "value":"./alibaba/sequential/app10/service_graph.json"
+      },
+      "OutputPath": {
+         "type":"metadata",
+         "value":"/generated/muBench"
+      },
+      "OutputFile": {
+         "type":"metadata",
+         "value":"app10-workmodel.json"
+      },
+      "request_method":{
+         "type": "metadata",
+         "value":"rest"
+      },
+      "databases_prefix": {
+         "type":"metadata",
+         "value": "sdb"
+      }
+   }
+}

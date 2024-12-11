@@ -10,6 +10,7 @@ We want to use the 2022 trace data, because:
 
 * Call rates have cycles (hourly, daily, weekly, ...) and the 2022 trace has 13 days of traces which allows us to model up to a weekly cycle.
 * We need to re-create the benchmark muBench Microservices anyways, so we can extract the corresponding MS-Call data as well. (The output data provided by the original authors cannot directly be linked back)
+    * can use rpcid == '0' to find the users' calls
 
 ## Changes from MS 2021 to MS 2022
 

@@ -60,15 +60,21 @@ The resulting architecture can be deployed into Kubernetes and also be called vi
 
 [Great docs in their own repo](./muBench/README.md)
 
-    docker-compose up mubench -d
-    docker-compose exec -it mubench bash
-
 ### muBench and Alibaba Trace 2021
 
 Their repository contains a [ZIP file](./muBench/examples/Alibaba/)
 with microservices that are derived from Alibaba Traces.
 
-Also the Matlab Code to produce the content [is available here](./muBench/examples/Alibaba/Matlab/allinone.m).
+Also the Matlab Code to produce the content [is available here](./muBench/examples/Alibaba/Matlab).
+
+Start and exec into container
+
+    docker-compose up mubench -d
+    docker-compose exec -it mubench bash
+
+Generate WorkModel
+
+    python3 WorkModelGenerator/RunWorkModelGen.py -c WorkModelParameters.json
 
 # Traces
 
