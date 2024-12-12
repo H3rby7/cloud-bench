@@ -34,6 +34,7 @@ Dataformat changes (from 2021)
 * 'rpctype' and 'um' swapped column
 * added 'uminstanceid' after 'um'
 * added 'dm' and 'dinstanceid' after 'interface'
+* MS names have different format
 
 # Developing / Recreating
 
