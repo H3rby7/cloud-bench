@@ -49,6 +49,7 @@ fetch_data() {
             file_name="${trace_types[$i]}_${idx}.tar.gz"
             file_path="${dir_name}/${file_name}"
             remote_path="${remote_paths[$i]}_${idx}.tar.gz"
+            # URL Pattern: https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2022MicroservicesTraces/${X}/${X}_0.tar.gz
             url="${TRACE_URL_BASE}/${remote_path}"
             command="wget ${WGET_OPTS} -O ${file_path} ${url}"
             $command
