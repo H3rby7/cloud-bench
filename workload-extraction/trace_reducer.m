@@ -9,16 +9,8 @@ function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
 
     trace_count = height(T);
 
-    if trace_count < 2
-        % trace has no entries
-        % trace has one entry (is either only rpc_id "0" or invalid trace)
-        %  -> no more work to do
-        return
-    end
-
-    rpc_0_idx = strcmp(T.rpc_id, "0") > 0;
-    if sum(rpc_0_idx) == trace_count
-        % All entries have rpc_id "0", uninteresting for graphs
+    if trace_count == 0
+        % trace has no entries -> no more work to do
         return
     end
 
@@ -32,7 +24,12 @@ function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
         return
     end
 
-    add(outKVStore, trace_id, sortrows(T,'rpc_id','ascend'));
+    % Some calls seem to be recorded twice within a small ms timeframe and
+    % the exact same downstreams, which cannot be a fan-out. So we filter
+    % out these entries.
+    [~, uniqueIdx] = unique(T(:, ["trace_id", "service", "rpc_id", "upstream_instance", "interface", "downstream_instance"]), "rows");
+
+    add(outKVStore, trace_id, sortrows(T(uniqueIdx,:),'rpc_id','ascend'));
 end
 
 
