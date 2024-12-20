@@ -10,10 +10,10 @@ function trace_mapper(data, ~, intermKVStore, col_idx_service)
     for i=1:service_count
         t = table(split{i, :}, VariableNames=vars);
         service_tables{i,1} = t.service{1};
-        unavailable_interface_idx = strcmp(t.interface, "UNAVAILABLE") > 0;
-        unavailable_upstream_instance_idx = strcmp(t.upstream_instance, "UNAVAILABLE") > 0;
-        unavailable_downstream_instance_idx = strcmp(t.downstream_instance, "UNAVAILABLE") > 0;
-        bad_rows = unavailable_interface_idx | unavailable_upstream_instance_idx | unavailable_downstream_instance_idx;
+        unavailable_interface_idx = ismember(t.interface, ["UNAVAILABLE", "UNKNOWN"]);
+        unavailable_upstream_idx = ismember(t.upstream_ms, ["UNAVAILABLE", "UNKNOWN"]);
+        unavailable_downstream_idx = ismember(t.downstream_ms, ["UNAVAILABLE", "UNKNOWN"]);
+        bad_rows = unavailable_interface_idx | unavailable_upstream_idx | unavailable_downstream_idx;
         % It may be useful to check for the trace_id's related to the bad
         % rows and drop all entries for the given trace_ids
         % This requires further investigation on whether the resulting gaps
