@@ -1,15 +1,15 @@
-function trace_mapper(data, ~, intermKVStore, col_idx_service)
+function trace_mapper(data, ~, intermKVStore, col_idx_trace_id)
 
-    by_service = findgroups(data{:, col_idx_service});
+    by_trace_id = findgroups(data{:, col_idx_trace_id});
     % Split table
-    split = splitapply( @(varargin) varargin, data , by_service);
-    service_count = height(split);
-    service_tables = cell(service_count, 2);
+    split = splitapply( @(varargin) varargin, data , by_trace_id);
+    trace_id_count = height(split);
+    trace_sub_tables = cell(trace_id_count, 2);
 
     vars = data.Properties.VariableNames;
-    for i=1:service_count
+    for i=1:trace_id_count
         t = table(split{i, :}, VariableNames=vars);
-        service_tables{i,1} = t.service{1};
+        trace_sub_tables{i,1} = t.trace_id{1};
         unavailable_interface_idx = ismember(t.interface, ["UNAVAILABLE", "UNKNOWN"]);
         unavailable_upstream_idx = ismember(t.upstream_ms, ["UNAVAILABLE", "UNKNOWN"]);
         unavailable_downstream_idx = ismember(t.downstream_ms, ["UNAVAILABLE", "UNKNOWN"]);
@@ -18,8 +18,8 @@ function trace_mapper(data, ~, intermKVStore, col_idx_service)
         % rows and drop all entries for the given trace_ids
         % This requires further investigation on whether the resulting gaps
         % can be filled by other trace data or remain open.
-        service_tables{i,2} = t(~bad_rows,:);
+        trace_sub_tables{i,2} = t(~bad_rows,:);
     end
-    addmulti(intermKVStore, vertcat(service_tables(:,1)), service_tables(:,2));
+    addmulti(intermKVStore, vertcat(trace_sub_tables(:,1)), trace_sub_tables(:,2));
 
 end
