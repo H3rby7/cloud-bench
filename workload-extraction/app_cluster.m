@@ -13,45 +13,46 @@ function [services] = app_cluster(service_graphs, sharingT, napps)
     
     h_services = height(service_graphs);
     similarity_matrix = zeros(h_services,h_services);
-    one_perc = idivide(int16(h_services), 100);
+    node_names = cellfun(@getGraphNodeNames, service_graphs{:,2}, 'UniformOutput',false);
 
-    for i = 1:h_services
-        svc_i = service_graphs{i,2}{1};
-        nodes1= svc_i.Nodes;
-        if height(nodes1) == 0
+    parfor i = 1:h_services
+        names1 = node_names{i};
+        if height(names1) == 0
             continue;
         end
+        similarity_row = zeros(1,h_services);
         for j = i+1:h_services
-            svc_j = service_graphs{j,2}{1};
-            nodes2= svc_j.Nodes;
-            if height(nodes2) == 0
+            names2 = node_names{j};
+            if height(names2) == 0
                 continue;
             end
             % use node names to calculate similarity between two service graphs
-            names1 = nodes1.Name;
-            names2 = nodes2.Name;
             common = sum(ismember(names1, names2));
             %fprintf("%d, %d common %d\n",i,j,common);
             if(common>sharingT*length(names1) && common>sharingT*length(names2))
-              similarity_matrix(i,j)=1;
-              similarity_matrix(j,i)=1;
+              similarity_row(1,j)=1;
             end
         end
-        if mod(i, one_perc) == 0
-            progress = idivide(int16(i), one_perc);
-            fprintf("Clustering: %d\%", progress)
-        end
+        similarity_matrix(i,:) = similarity_row;
     end
+    symmetric = similarity_matrix'+tril(similarity_matrix',-1).';
+    disp('Similarity Matrix created.');
     % clustering for findings apps
     myfunc=@(X,K)(spectralcluster(X,K));
     if napps<=0
-        k_opt=evalclusters(similarity_matrix,myfunc,'CalinskiHarabasz','klist',2:50);
+        k_opt=evalclusters(symmetric,myfunc,'CalinskiHarabasz','klist',2:50);
         napps = k_opt.OptimalK;
     end
-    clusters = spectralcluster(similarity_matrix,napps);
+    disp('Clustering...');
+    clusters = spectralcluster(symmetric,napps);
 
     % append a column to the services table 
     % to hold the corresponding app (cluster)
     services = [service_graphs table(clusters)];
     services.Properties.VariableNames(3) = "app";
+end
+
+function [names] = getGraphNodeNames(graph)
+    all_names = graph.Nodes.Name;
+    names = all_names(strcmp(all_names, "USER") == 0);
 end
