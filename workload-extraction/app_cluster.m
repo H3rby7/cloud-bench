@@ -1,5 +1,5 @@
 
-function [clustered_services] = app_cluster(services, sharingT, napps)
+function [clustered_services] = app_cluster(services, sharingT, n_clusters)
     % an app is a set of "similar" services. Grouping performed according to the paper https://ieeexplore.ieee.org/abstract/document/9774016 
     % v_G_app{i} dependency graph of app #i
     % u_service_a{i} set of services that belongs to app #i
@@ -9,7 +9,7 @@ function [clustered_services] = app_cluster(services, sharingT, napps)
     % trace_ids: list of trace_id that correspond to that service
     % graph: a digraph constructed using the available traces' upstream and downstream information
     % sharingT sharing threshold to declare two services as similar
-    % napps number of applications to be generated, if <=0 then this number is computed as in the paper 
+    % n_clusters number of clusters to use, if <=0 then this number is computed as in the paper 
     
     h_services = height(services);
     similarity_matrix = zeros(h_services,h_services);
@@ -39,17 +39,17 @@ function [clustered_services] = app_cluster(services, sharingT, napps)
     disp('Similarity Matrix created.');
     % clustering for findings apps
     myfunc=@(X,K)(spectralcluster(X,K));
-    if napps<=0
+    if n_clusters<=0
         k_opt=evalclusters(symmetric,myfunc,'CalinskiHarabasz','klist',2:50);
-        napps = k_opt.OptimalK;
+        n_clusters = k_opt.OptimalK;
     end
     disp('Clustering...');
-    clusters = spectralcluster(symmetric,napps);
+    clusters = spectralcluster(symmetric,n_clusters);
 
     % Create output table
     clustered_services = [services table(clusters)];
     % Label Columns
-    clustered_services.Properties.VariableNames(5) = "app";
+    clustered_services.Properties.VariableNames(5) = "cluster";
 end
 
 function [names] = getGraphNodeNames(graph)

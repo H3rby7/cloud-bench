@@ -19,15 +19,17 @@ function service_graph_mapper(inputKVStore, ~, intermKVStore)
     
         % Sanity Check
         ms_from_trace = unique([traces.upstream_ms ; traces.downstream_ms]);
-        ms_count_graph = graph.numnodes;
-        if (length(ms_from_trace) ~= ms_count_graph)
-            fprintf('Warning: MS count for Service %s -> count of MS in service graph and count of MS from trace differ!\n', service_id);
+        graph_node_count = graph.numnodes;
+        if (length(ms_from_trace) ~= graph_node_count)
+            fprintf('Warning: Node count for Service %s -> count of nodes in service graph and count of node from trace differ!\n', service_id);
             % nodenames = graph{i,3}.Nodes.Name
             % ms_from_trace
         end
     
+        % Subtract the "USER" from the node_count to get the ms_count
+        ms_count = graph_node_count - 1;
         ms_max_depth = max(distances(graph, "USER"));
-        add(intermKVStore, service_id, {graph, ms_count_graph, ms_max_depth});
+        add(intermKVStore, service_id, {graph, ms_count, ms_max_depth});
         
     end
 end
