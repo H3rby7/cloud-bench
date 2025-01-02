@@ -1,5 +1,5 @@
 
-function [services] = app_cluster(services, sharingT, napps)
+function [clustered_services] = app_cluster(services, sharingT, napps)
     % an app is a set of "similar" services. Grouping performed according to the paper https://ieeexplore.ieee.org/abstract/document/9774016 
     % v_G_app{i} dependency graph of app #i
     % u_service_a{i} set of services that belongs to app #i
