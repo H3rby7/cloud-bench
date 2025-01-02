@@ -1,11 +1,11 @@
 
-function [apps] = app_graphs(services_a)
+function [apps] = cluster_graphs(services_a)
     napps = max(services_a.app);
     app_graphs = cell(napps,4);
 
     for i=1:napps
-        fprintf('Generating graph for app %d\n', i);
-        service_idx = (services_a.app==i); %services idx of the cluster/app
+        fprintf('Generating graph for cluster %d\n', i);
+        service_idx = (services_a.app==i); %services idx of the cluster
         entries = services_a.Value(service_idx,:);
         entries = cat(1, entries{:});
 

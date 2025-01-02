@@ -1,15 +1,13 @@
 
-function [clustered_services] = app_cluster(services, sharingT, n_clusters)
-    % an app is a set of "similar" services. Grouping performed according to the paper https://ieeexplore.ieee.org/abstract/document/9774016 
-    % v_G_app{i} dependency graph of app #i
-    % u_service_a{i} set of services that belongs to app #i
-    % u_traceids_a{i} set of traces that belongs to app #i
-    % services as returned by 'service_graphs' with these columns:
-    % service: ID of the service ('interface')
-    % trace_ids: list of trace_id that correspond to that service
-    % graph: a digraph constructed using the available traces' upstream and downstream information
+function [clustered_services] = service_clustering(services, sharingT, n_clusters)
+    % Grouping performed according to the paper https://ieeexplore.ieee.org/abstract/document/9774016
+    % Returns the input 'services' together with their cluster
+    % services as returned by 'service_graph_reducer', expecting these columns:
+        % service_id: ID of the service
+        % graph: a digraph constructed using the available traces' upstream and downstream information
     % sharingT sharing threshold to declare two services as similar
-    % n_clusters number of clusters to use, if <=0 then this number is computed as in the paper 
+    % n_clusters number of clusters to use, if <=0 then this number is
+    % computed as in the paper mentioned above.
     
     h_services = height(services);
     similarity_matrix = zeros(h_services,h_services);
@@ -53,6 +51,7 @@ function [clustered_services] = app_cluster(services, sharingT, n_clusters)
 end
 
 function [names] = getGraphNodeNames(graph)
+    % Get all node names excluding the "USER" node
     all_names = graph.Nodes.Name;
     names = all_names(strcmp(all_names, "USER") == 0);
 end
