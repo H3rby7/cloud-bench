@@ -47,7 +47,7 @@ function [clustered_services] = service_clustering(services, sharingT, n_cluster
     % Create output table
     clustered_services = [services table(clusters)];
     % Label Columns
-    clustered_services.Properties.VariableNames(5) = "cluster";
+    clustered_services.Properties.VariableNames(width(clustered_services)) = "cluster";
 end
 
 function [names] = getGraphNodeNames(graph)

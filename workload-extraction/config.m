@@ -1,4 +1,4 @@
-function [trace_location, trace_header_lines, output_dir_sequential, output_dir_parallel, output_dir_root] = config()
+function [trace_location, trace_header_lines, output_dir_sequential, output_dir_parallel, output_dir_root, sampling_factor] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Trace options ***************
@@ -15,5 +15,9 @@ function [trace_location, trace_header_lines, output_dir_sequential, output_dir_
     output_dir_sequential = output_dir_root+"/sequential";
     % DIR within root DIR to hold parallel output
     output_dir_parallel = output_dir_root+"/parallel";
+
+    % *************** Sampling ***************
+    % Workload reduction factor
+    sampling_factor = 0.01;
     
 end

@@ -29,7 +29,8 @@ function service_graph_mapper(inputKVStore, ~, intermKVStore)
         % Subtract the "USER" from the node_count to get the ms_count
         ms_count = graph_node_count - 1;
         ms_max_depth = max(distances(graph, "USER"));
-        add(intermKVStore, service_id, {graph, ms_count, ms_max_depth});
+        trace_count = height(unique(traces.trace_id));
+        add(intermKVStore, service_id, {graph, ms_count, ms_max_depth, trace_count});
         
     end
 end
