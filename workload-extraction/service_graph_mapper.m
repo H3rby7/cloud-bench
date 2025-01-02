@@ -1,12 +1,17 @@
-function service_graph_mapper(data, ~, intermKVStore)
-    % data as created by service mapping (a KEY-VALUE store)
-    % Key = service_id
-    % Value = trace entries of the service_id
+function service_graph_mapper(inputKVStore, ~, intermKVStore)
+    % Create a directed graph from the trace entries
+    % inputKVStore as created by service mapping (a KEY-VALUE store)
+    % inputKVStore
+        % Key = service_id
+        % Value = trace entries of the service_id
+    % intermKVStore
+        % Key = service_id
+        % Value = cell array of {digraph, nodecount, maxDepth}
 
-    for i=1:height(data)
+    for i=1:height(inputKVStore)
         % Get all trace entries
-        traces = data.Value{i};
-        service_id = data.Key{i};
+        traces = inputKVStore.Value{i};
+        service_id = inputKVStore.Key{i};
     
         % Create directed graph
         % using the trace upstream and downstream combinations to describe its edges
@@ -21,7 +26,8 @@ function service_graph_mapper(data, ~, intermKVStore)
             % ms_from_trace
         end
     
-        add(intermKVStore, service_id, graph);
+        ms_max_depth = max(distances(graph, "USER"));
+        add(intermKVStore, service_id, {graph, ms_count_graph, ms_max_depth});
         
     end
 end
