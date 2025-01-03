@@ -34,25 +34,31 @@ function [unique_node_name_options] = node_options(graph, node, rpc_id)
             child_options = node_options(graph, children(j), id_opt);
             permutation_options{j} = child_options;
         end
-        % flattened = flatten_permutations(permutation_options);
-        all_node_name_options{i} = [rpc_id sort(horzcat(permutation_options{:}))];
+        flattened = flatten_permutations(permutation_options);
+        all_node_name_options{i} = [rpc_id sort(flattened{:})];
     end
     [~, unique_idx] = unique(cell2table(all_node_name_options));
     unique_node_name_options = all_node_name_options(unique_idx,:);
 end
 
 
-function [flattened] = flatten_permutations(permutation_options)
+function [output] = flatten_permutations(permutation_options)
     flattened = permutation_options{1};
     for i=2:height(permutation_options)
-        tmp = cell(0);
-        for o=1:width(flattened)
+        current_size = width(flattened);
+        next_el_size = width(permutation_options(i));
+        tmp_i = cell(1, current_size);
+        for o=1:current_size
             option = flattened{o};
-            for n=1:width(permutation_options(i))
+            tmp_o = cell(1, next_el_size);
+            for n=1:next_el_size
                 next = permutation_options{i}{n};
-                tmp = [option next];
+                tmp_o{n} = [option next];
             end
+            tmp_i{o} = tmp_o;
         end
-        flattened = tmp;
+        % must horzcat or something
+        flattened = tmp_i;
     end
+    output = flattened{1};
 end
