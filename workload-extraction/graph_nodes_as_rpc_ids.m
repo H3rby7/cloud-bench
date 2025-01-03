@@ -1,30 +1,3 @@
-% edge_table = ["USER" "Root"; 
-%               "Root" "S_1"; 
-%               "Root" "S_2"; 
-%               "Root" "S_3"; 
-%               "S_1" "S_1_1"; 
-%               "S_1" "S_1_2"; 
-%               "S_2" "S_2_1"; 
-%               "S_2" "S_2_2"; 
-%               "S_2" "S_2_3";
-%               "S_1_2" "S_2_1"];
-edge_table = ["USER" "MS_48247";
-"MS_48247"    "MS_19585";
-"MS_48247"    "MS_68650";
-"MS_48247"    "MS_27421";
-"MS_48247"    "MS_40991";
-"MS_68650"    "MS_19585";
-"MS_68650"    "MS_27421";
-"MS_68650"    "MS_15303"];
-
-g = digraph(edge_table(:,1), edge_table(:,2));
-tic
-result = graph_nodes_as_rpc_ids(g);
-toc
-disp(result);
-plot(g);
-
-
 function [node_name_options] = graph_nodes_as_rpc_ids(graph)
     opts = node_options(graph, "USER", "0");
     node_name_options = opts;

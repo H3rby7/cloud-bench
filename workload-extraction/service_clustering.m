@@ -11,16 +11,19 @@ function [clustered_services] = service_clustering(services, sharingT, n_cluster
     
     h_services = height(services);
     similarity_matrix = zeros(h_services,h_services);
-    node_names = cellfun(@getGraphNodeNames, services.graph, 'UniformOutput',false);
 
     parfor i = 1:h_services
-        names1 = node_names{i};
+        % TODO: use more than just the first option, this is just to
+        % compile!
+        names1 = services.possible_node_names{i}{1};
         if height(names1) == 0
             continue;
         end
         similarity_row = zeros(1,h_services);
         for j = i+1:h_services
-            names2 = node_names{j};
+            % TODO: use more than just the first option, this is just to
+            % compile!
+            names2 = services.possible_node_names{j}{1};
             if height(names2) == 0
                 continue;
             end
@@ -48,10 +51,4 @@ function [clustered_services] = service_clustering(services, sharingT, n_cluster
     clustered_services = [services table(clusters)];
     % Label Columns
     clustered_services.Properties.VariableNames(width(clustered_services)) = "cluster";
-end
-
-function [names] = getGraphNodeNames(graph)
-    % Get all node names excluding the "USER" node
-    all_names = graph.Nodes.Name;
-    names = all_names(strcmp(all_names, "USER") == 0);
 end
