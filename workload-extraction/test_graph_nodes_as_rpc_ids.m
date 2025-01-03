@@ -1,14 +1,32 @@
-edge_table = ["USER" "S_Root"; "Root" "S_1"; "Root" "S_2"; "S_1" "S_1_1"; "S_1" "S_1_2"];
+% edge_table = ["USER" "Root"; 
+%               "Root" "S_1"; 
+%               "Root" "S_2"; 
+%               "Root" "S_3"; 
+%               "S_1" "S_1_1"; 
+%               "S_1" "S_1_2"; 
+%               "S_2" "S_2_1"; 
+%               "S_2" "S_2_2"; 
+%               "S_2" "S_2_3";
+%               "S_1_2" "S_2_1"];
+edge_table = ["USER" "MS_48247";
+"MS_48247"    "MS_19585";
+"MS_48247"    "MS_68650";
+"MS_48247"    "MS_27421";
+"MS_48247"    "MS_40991";
+"MS_68650"    "MS_19585";
+"MS_68650"    "MS_27421";
+"MS_68650"    "MS_15303"];
 
 g = digraph(edge_table(:,1), edge_table(:,2));
 
 result = graph_nodes_as_rpc_ids(g);
 
 disp(result);
+plot(g);
 
 
 function [node_name_options] = graph_nodes_as_rpc_ids(graph)
-    opts = node_options(graph, "Root", "0.1");
+    opts = node_options(graph, "USER", "0");
     node_name_options = opts;
 end
 
@@ -52,18 +70,20 @@ function [unique_node_name_options] = node_options(graph, node, rpc_id)
 
         % flatten the nodenames as in the end we want a string array
         flattened = flatten_permutations(permutation_options);
+        
+        all_node_name_options{i} = cell(height(flattened),1);
+        for j=1:height(flattened)
+            % prepend all options with rpc_id and add them to the list
+            all_node_name_options{i}{j} = [rpc_id sort(flattened{j})];
+        end
 
-        % TODO: flattened may return more than one result, we need to
-        % seperately prepend rpc_id to each entry and add them to the list
-
-        % add result to potential list
-        all_node_name_options{i} = [rpc_id sort(flattened{:})];
     end
 
     % the list may contain duplicate names, we filter them out to prevent
-    % double computations when passing the result back up.
-    [~, unique_idx] = unique(cell2table(all_node_name_options));
-    unique_node_name_options = all_node_name_options(unique_idx,:);
+    % double computations when passing the result back up
+    flattened = vertcat(all_node_name_options{:});
+    [~, unique_idx] = unique(cell2table(flattened));
+    unique_node_name_options = flattened(unique_idx,:);
 end
 
 
@@ -81,13 +101,13 @@ function [output] = flatten_permutations(permutation_options)
     for i=2:height(permutation_options)
 
         % options until now
-        current_size = width(flattened);
+        current_size = height(flattened);
 
         % options presented by the next item to multiply with
-        next_el_size = width(permutation_options(i));
+        next_el_size = height(permutation_options(i));
 
         % create an intermediate result cell
-        tmp_i = cell(1, current_size);
+        tmp_i = cell(current_size,1);
 
         for o=1:current_size
 
@@ -96,7 +116,7 @@ function [output] = flatten_permutations(permutation_options)
 
             % create an intermediate result to hold the results of this one
             % item and the items of 'next'
-            tmp_o = cell(1, next_el_size);
+            tmp_o = cell(next_el_size, 1);
 
             for n=1:next_el_size
                 % combine the next item and the already combined option
@@ -105,10 +125,7 @@ function [output] = flatten_permutations(permutation_options)
             end
             tmp_i{o} = tmp_o;
         end
-        flattened = tmp_i;
+        flattened = tmp_i{:};
     end
-    output = flattened{1};
-    if class(output) == "string"
-        output = {output};
-    end
+    output = flattened;
 end
