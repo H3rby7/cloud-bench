@@ -14,6 +14,7 @@ function [unique_node_name_options] = node_options(graph, node, rpc_id)
         unique_node_name_options = {rpc_id};
         return
     end
+    % TODO: children > 15 exceed variable size!
     % calculate permutations for children
     permutations = perms(1:child_count);
 

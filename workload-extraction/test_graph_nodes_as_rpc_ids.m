@@ -44,14 +44,40 @@ function [unique_node_name_options] = node_options(graph, node, rpc_id)
     % calculate permutations for children
     permutations = perms(1:child_count);
 
-    grand_child_count = 0;
+    % array holding the indeces of the children
+    child_idx = (1:child_count)';
+    % graph depths for each child
+    depths = zeros(child_count,1);
+    % maximum depth across all children
+    max_depth = 0;
     for i=1:child_count
-        grand_child_count = grand_child_count + height(graph.successors(children(i)));
+        d = distances(graph,children(i));
+        depths(i) = max(d(d ~= Inf));
+        if (max_depth < depths(i))
+            max_depth = depths(i);
+        end
     end
-    if grand_child_count == 0
+
+    % sort children by depths, as higher depth will potentially hold more information
+    sorted_by_depths = sortrows(table(child_idx, depths), "depths", "desc");
+
+
+    % MAYBE have two arrays:
+    % * permutations
+    % * non-permutations
+    % their results will be combined in the end, by appending non-perm to
+    % all perm entries.
+
+    if max_depth == 0
         % all children at hand are leafs, so the permutations do not matter
-        permutations = permutations(1,:);
+        % Create the simplest permutation from sorted child_idx
+        permutations = sorted_by_depths.child_idx';
+    else
+        % TODO: limit permutations to the first 5 children and append the rest?
+        % calculate permutations for children
+        permutations = perms(sorted_by_depths.child_idx');
     end
+
     permutation_count = height(permutations);
 
     % holds 1 cell as entry per permutation
