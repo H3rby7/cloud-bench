@@ -19,35 +19,74 @@ edge_table = ["USER" "MS_48247";
 
 g = digraph(edge_table(:,1), edge_table(:,2));
 tic
-result = graph_nodes_as_rpc_ids(g);
+result = graph_nodes_as_rpc_ids(g, 10);
 toc
 disp(result);
 plot(g);
 
 
-function [node_name_options] = graph_nodes_as_rpc_ids(graph)
-    opts = node_options(graph, "USER", "0");
+function [node_name_options] = graph_nodes_as_rpc_ids(graph, max_permutations)
+    if max_permutations > 15 
+        error("max_permutations must be smaller than 16 as otherwise maximum variable size is exceeded.")
+    end
+    opts = node_options(graph, "USER", "0", max_permutations);
     node_name_options = opts;
 end
 
 
-function [unique_node_name_options] = node_options(graph, node, rpc_id)
+function [output] = node_options(graph, node, rpc_id, max_permutations)
     % Get all naming options for this node and its successors
     % As we do not know if the first of n successors would be .1 or .n
     children = graph.successors(node);
     child_count = height(children);
     if child_count == 0
         % no children -> leaf node
-        unique_node_name_options = {rpc_id};
+        output = {rpc_id};
         return
     end
+
     % calculate permutations for children
-    permutations = perms(1:child_count);
+    [permutations, statics] = get_permutations_and_statics(graph, node, max_permutations);
+    permutation_count = height(permutations);
+
+    % holds 1 cell as entry per permutation
+    % cell can have multiple results, as children may also have more than
+    % one naming options
+    permuted_name_options = cell(permutation_count,1);
+    for i=1:permutation_count
+        child_order = permutations(i,:);
+        permuted_name_options{i} = get_name_options_for_child_order(graph, children, rpc_id, child_order, max_permutations);
+    end
+
+    % the list may contain duplicate names, we filter them out to prevent
+    % double computations when passing the result back up
+    flattened = vertcat(permuted_name_options{:});
+    [~, unique_idx] = unique(cell2table(flattened));
+    permuted_unique_name_options = flattened(unique_idx,:);
+
+    if (width(statics) == 0)
+        % No static appending needed, can take output immediately
+        output = permuted_unique_name_options;
+        return;
+    end
+
+    static_names = get_name_options_for_child_order(graph, children, rpc_id, statics, max_permutations);
+    for i=1:height(permuted_unique_name_options)
+        permuted_unique_name_options{i} = [permuted_unique_name_options{i} static_names];
+    end
+    output = permuted_unique_name_options;
+end
+
+function [permutations, statics] = get_permutations_and_statics(graph, node, max_permutations)
+    children = graph.successors(node);
+    child_count = height(children);
 
     % array holding the indeces of the children
     child_idx = (1:child_count)';
+
     % graph depths for each child
     depths = zeros(child_count,1);
+
     % maximum depth across all children
     max_depth = 0;
     for i=1:child_count
@@ -60,67 +99,53 @@ function [unique_node_name_options] = node_options(graph, node, rpc_id)
 
     % sort children by depths, as higher depth will potentially hold more information
     sorted_by_depths = sortrows(table(child_idx, depths), "depths", "desc");
+    sorted_children = sorted_by_depths.child_idx';
 
-
-    % MAYBE have two arrays:
-    % * permutations
-    % * non-permutations
-    % their results will be combined in the end, by appending non-perm to
-    % all perm entries.
-
+    statics = [];
     if max_depth == 0
         % all children at hand are leafs, so the permutations do not matter
         % Create the simplest permutation from sorted child_idx
-        permutations = sorted_by_depths.child_idx';
-    else
-        % TODO: limit permutations to the first 5 children and append the rest?
-        % calculate permutations for children
-        permutations = perms(sorted_by_depths.child_idx');
+        permutations = sorted_children;
+        return
     end
-
-    permutation_count = height(permutations);
-
-    % holds 1 cell as entry per permutation
-    % cell can have multiple results, as children may also have more than
-    % one naming options
-    all_node_name_options = cell(permutation_count,1);
-    for i=1:permutation_count
-
-        % should hold 1 entry cell per child
-        % cell can have multiple results, as children may also have more than
-        % one naming options
-        permutation_options = cell(child_count,1);
-
-        % within the permutation we get the potential node names for
-        % all children
-        for j=1:child_count
-            % id_opt -> the suggested rpc_id based on the permutation
-            id_opt = rpc_id + "." + permutations(i, j);
-
-            % get all node-name combination of successors, given we had
-            % used the id_opt as this child's node_name
-            child_options = node_options(graph, children(j), id_opt);
-            permutation_options{j} = child_options;
-        end
-
-        % flatten the nodenames as in the end we want a string array
-        flattened = flatten_permutations(permutation_options);
-        
-        all_node_name_options{i} = cell(height(flattened),1);
-        for j=1:height(flattened)
-            % prepend all options with rpc_id and add them to the list
-            all_node_name_options{i}{j} = [rpc_id sort(flattened{j})];
-        end
-
+    if child_count <= max_permutations
+        permutations = perms(sorted_children);
+        return
     end
-
-    % the list may contain duplicate names, we filter them out to prevent
-    % double computations when passing the result back up
-    flattened = vertcat(all_node_name_options{:});
-    [~, unique_idx] = unique(cell2table(flattened));
-    unique_node_name_options = flattened(unique_idx,:);
+    statics = sorted_children(max_permutations+1:child_count);
+    permutations = sorted_children(1:max_permutations);
 end
 
+function [output] = get_name_options_for_child_order(graph, children, rpc_id, child_order, max_permutations)
+
+    child_count = width(child_order);
+    % should hold 1 entry cell per child
+    % cell can have multiple results, as children may also have more than
+    % one naming options
+    permutation_options = cell(child_count,1);
+
+    % within the permutation we get the potential node names for
+    % all children
+    for j=1:child_count
+        % id_opt -> the suggested rpc_id based on the permutation
+        id_opt = rpc_id + "." + child_order(j);
+
+        % get all node-name combination of successors, given we had
+        % used the id_opt as this child's node_name
+        child_options = node_options(graph, children(j), id_opt, max_permutations);
+        permutation_options{j} = child_options;
+    end
+
+    % flatten the nodenames as in the end we want a string array
+    flattened = flatten_permutations(permutation_options);
+    
+    all_node_name_options = cell(height(flattened),1);
+    for j=1:height(flattened)
+        % prepend all options with rpc_id and add them to the list
+        all_node_name_options{j} = [rpc_id sort(flattened{j})];
+    end
+    output = all_node_name_options;
+end
 
 function [output] = flatten_permutations(permutation_options)
     % permutation_options contains a cell of varying size for each child

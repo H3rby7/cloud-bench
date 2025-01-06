@@ -37,7 +37,7 @@ function service_graph_mapper(inputKVStore, ~, intermKVStore)
         ms_count = graph_node_count - 1;
         ms_max_depth = max(distances(simple_graph, "USER"));
         trace_count = height(unique(traces.trace_id));
-        possible_node_names = graph_nodes_as_rpc_ids(simple_graph);
+        possible_node_names = graph_nodes_as_rpc_ids(simple_graph,4);
         add(intermKVStore, service_id, {simple_graph, possible_node_names, ms_count, ms_max_depth, trace_count});
         
     end
