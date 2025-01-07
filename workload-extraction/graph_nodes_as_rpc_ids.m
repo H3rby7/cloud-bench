@@ -45,7 +45,7 @@ function [output] = node_options(graph, node, rpc_id, max_permutations)
 
     static_names = get_name_options_for_child_order(graph, children, rpc_id, statics, max_permutations);
     for i=1:height(permuted_unique_name_options)
-        permuted_unique_name_options{i} = [permuted_unique_name_options{i} static_names];
+        permuted_unique_name_options{i} = [permuted_unique_name_options{i} static_names{:}];
     end
     output = permuted_unique_name_options;
 end
