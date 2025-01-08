@@ -47,7 +47,7 @@ function [service_samples] = service_sampling(service_clusters, sampling_factor)
         % this cluster
         trace_factor = zeros(target_service_count, 1) + trace_sample_factor;
 
-        output = [sampled_services(:,[1,3,4,6]) table(service_cluster_share) table(trace_factor)];
+        output = [sampled_services(:,[1,3,4,6,7]) table(service_cluster_share) table(trace_factor)];
         service_sample_cells{i} = output;
     end
 

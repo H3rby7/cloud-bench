@@ -1,4 +1,4 @@
-function [trace_location, trace_header_lines, output_dir_sequential, output_dir_parallel, output_dir_root, sampling_factor] = config()
+function [trace_location, trace_header_lines, output_dir_sequential, output_dir_parallel, output_dir_root, similarity_threshold, sampling_factor] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Trace options ***************
@@ -17,6 +17,9 @@ function [trace_location, trace_header_lines, output_dir_sequential, output_dir_
     output_dir_parallel = output_dir_root+"/parallel";
 
     % *************** Sampling ***************
+    % Service graph similarity threshold
+    similarity_threshold = 0.8;
+
     % Workload reduction factor
     sampling_factor = 0.01;
     
