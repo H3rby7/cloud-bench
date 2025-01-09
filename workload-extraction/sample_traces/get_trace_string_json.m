@@ -6,7 +6,7 @@ function [output] = get_trace_string_json(dg)
 
     body = rec(dg, "USER");
     json = ['{' body{1} '}'];
-    output = horzcat(json{:});
+    output = join(json, "");
 end
 
 function [out] = rec(digraph, node_name)
