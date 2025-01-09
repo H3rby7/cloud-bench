@@ -3,10 +3,7 @@ function [trace_location, trace_header_lines, sampling_factor] = config()
 
     % *************** Trace options ***************
     % trace_location of alibaba cluster trace microservices v2022
-    trace_location = [...
-        "../../traces/alibaba/2022-ms/CallGraph/CallGraph_0_10000.csv",...
-        "../../traces/alibaba/2022-ms/CallGraph/CallGraph_10000_20000.csv"...
-        ];
+    trace_location = "../../traces/alibaba/2022-ms/CallGraph/input";
     % how many lines to skip
     trace_header_lines = 1;
 
