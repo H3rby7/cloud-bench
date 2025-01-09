@@ -4,6 +4,8 @@ function [service_samples] = service_sampling(service_clusters, sampling_factor)
         % service_id: ID of the service
         % graph: a digraph constructed using the available traces' upstream and downstream information
     % sampling_factor as reduction factor
+    % service_samples: The selected services. As it is not possible to
+    % TODO: explain 'trace_factor'
     
     cluster_count = max(service_clusters.cluster);
     n_step = 1 / sampling_factor;

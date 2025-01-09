@@ -1,4 +1,11 @@
 function [node_name_options] = graph_nodes_as_rpc_ids(graph, max_permutations)
+    % Returns the input digraph as a representation of RPC_IDs as seen from
+    % the traces. As it is not clear whether a node is 0.1.1 or maybe
+    % rather the 0.2.1 we calculate up to 'max_permutations' for each 
+    % combination of node children permutations 
+    % graph: digraph
+    % max_permutations: how many permutations (smaller than 16) - 
+        % higher -> better results, but computing time explodes.
     if max_permutations > 15 
         error("max_permutations must be smaller than 16 as otherwise maximum variable size is exceeded.")
     end
@@ -42,8 +49,11 @@ function [output] = node_options(graph, node, rpc_id, max_permutations)
         output = permuted_unique_name_options;
         return;
     end
-
+    
+    % get the non-permuted chld names
     static_names = get_name_options_for_child_order(graph, children, rpc_id, statics, max_permutations);
+
+    % append the static children to each permuted result
     for i=1:height(permuted_unique_name_options)
         permuted_unique_name_options{i} = [permuted_unique_name_options{i} static_names{:}];
     end
@@ -51,6 +61,10 @@ function [output] = node_options(graph, node, rpc_id, max_permutations)
 end
 
 function [permutations, statics] = get_permutations_and_statics(graph, node, max_permutations)
+    % Looking at the successors of one node, create permutations of the
+    % first n nodes and list the rest statically
+    % The nodes are sorted by their remaining depths first, to prioritize
+    % the most defining successors when permuting
     children = graph.successors(node);
     child_count = height(children);
 
@@ -90,6 +104,8 @@ function [permutations, statics] = get_permutations_and_statics(graph, node, max
 end
 
 function [output] = get_name_options_for_child_order(graph, children, rpc_id, child_order, max_permutations)
+    % For the given input child_order (1 permutation) get the names of the
+    % children, including their successors. (this is recursive)
 
     child_count = width(child_order);
     % should hold 1 entry cell per child

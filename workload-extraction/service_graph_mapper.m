@@ -6,7 +6,7 @@ function service_graph_mapper(inputKVStore, ~, intermKVStore)
         % Value = trace entries of the service_id
     % intermKVStore
         % Key = service_id
-        % Value = cell array of {digraph, nodecount, maxDepth}
+        % Value = cell array of {digraph, possible_node_names, nodecount, maxDepth, trace_count}
 
     for i=1:height(inputKVStore)
         % Get all trace entries
@@ -35,10 +35,19 @@ function service_graph_mapper(inputKVStore, ~, intermKVStore)
     
         % Subtract the "USER" from the node_count to get the ms_count
         ms_count = graph_node_count - 1;
+
+        % Highest depth this graph has to offer
         ms_max_depth = max(distances(simple_graph, "USER"));
+
+        % How many trace_ids do we have for this service
         trace_count = height(unique(traces.trace_id));
+
+        % Options to express this service as a combination of RPC_IDs
+        % We use this lateron to calculate the similarity between service
+        % graphs
         possible_node_names = graph_nodes_as_rpc_ids(simple_graph,4);
+
+        % Add the result to the KV-Store
         add(intermKVStore, service_id, {simple_graph, possible_node_names, ms_count, ms_max_depth, trace_count});
-        
     end
 end
