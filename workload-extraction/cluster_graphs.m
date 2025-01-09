@@ -40,8 +40,3 @@ function [apps] = cluster_graphs(services_a)
 
     apps = cell2table(app_graphs, "VariableNames", ["app_nr", "traces", "service_ids", "graph"]);
 end
-
-function [edges] = getGraphEdges(graph)
-    % Return edges of the graph in a cell
-    edges = {graph{:}.Edges};
-end
