@@ -2,6 +2,10 @@ function trace_mapper(data, ~, intermKVStore, col_idx_trace_id, service_samples)
 
     valid_service_ids = service_samples.service_id;
     entry_with_valid_service_idx = ismember(data.service, valid_service_ids);
+    if sum(entry_with_valid_service_idx) == 0
+        % no entries in this batch!
+        return;
+    end
     entry_with_valid_service = data(entry_with_valid_service_idx,:);
 
     by_service = findgroups(entry_with_valid_service{:, "service"});

@@ -1,4 +1,5 @@
 function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
+    trace_id = string(trace_id);
     T = empty_table;
     
     % Append all entries we have to the table
@@ -35,9 +36,12 @@ function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
     if not(check_ms_connectivity(dg))
         return
     end
-    % create the json string and add to output
-    as_json = get_trace_string_json(dg);
-    add(outKVStore, trace_id, as_json);
+
+    service = string(T_unique.service{1});
+    timestamp = min(T_unique.timestamp);
+    graph = {dg};
+    
+    add(outKVStore, trace_id, table(timestamp, service, trace_id, graph));
 end
 
 
