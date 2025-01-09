@@ -1,8 +1,7 @@
 function [ms_names] = getGraphMsNames(graph)
     % Get MS names of the graph
-    % The resulting names will be unique and not contain the "USER" node.
+    % The resulting names will be unique
     all_names = graph{:}.Nodes.Name';
-    user_idx = strcmp(all_names, "USER");
-    unique_names = unique(all_names(~user_idx));
+    unique_names = unique(all_names);
     ms_names = string(unique_names);
 end
