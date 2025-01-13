@@ -9,10 +9,10 @@ echo "Downloading README for quick reference"
 wget ${WGET_OPTS} https://github.com/alibaba/clusterdata/raw/7358bbaf40778d4bd0464a64a430812088b7b74e/cluster-trace-microservices-v2022/README.md
 
 trace_types=(
-  # "NodeMetrics"
+  # "CallGraph"
   # "MSMetrics"
+  "NodeMetrics"
   # "MSRTMCR"
-  "CallGraph"
 )
 
 #!/bin/bash
@@ -25,12 +25,17 @@ prepare_dir() {
 # $1 = start_day, $2 = end_day, $3 = start_hour, $4 = end_hour
 fetch_data() {
     declare -a remote_paths=(
-        "CallGraph/CallGraph"
-        "MSMetricsUpdate/MSMetricsUpdate"
+        # "CallGraph/CallGraph"
+        # "MSMetricsUpdate/MSMetricsUpdate"
         "NodeMetricsUpdate/NodeMetricsUpdate"
-        "MCRRTUpdate/MCRRTUpdate"
+        # "MCRRTUpdate/MCRRTUpdate"
     )
-    declare -a ratios=(3 30 720 3)
+    declare -a ratios=(
+      # 3 
+      # 30 
+      720 
+      # 3
+    )
     start_minute=$(($1 * 24 * 60 + $3 * 60))
     end_minute=$(($2 * 24 * 60 + $4 * 60))
     echo ""
