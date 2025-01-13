@@ -2,3 +2,5 @@
 
 *.mat
 !samples_export.mat
+
+*.csv
