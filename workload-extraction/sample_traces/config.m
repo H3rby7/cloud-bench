@@ -9,6 +9,13 @@ function [trace_location, trace_header_lines, sampling_factor] = config()
 
     % *************** Sampling ***************
     % Workload reduction factor
-    sampling_factor = 0.01;
+    % Original Workload is for ~40K baremetal nodes
+    raw_trace_node_count = 40000;
+    % We want to aim at ~10 nodes
+    target_node_count = 10;
+    % Service sampling has already reduced to this factor
+    sampled_service_factor = 0.01;
+    % Sampling factor for traces (~0.025)
+    sampling_factor = (target_node_count / raw_trace_node_count) / sampled_service_factor;
     
 end
