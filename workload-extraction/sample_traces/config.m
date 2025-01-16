@@ -1,4 +1,4 @@
-function [trace_location, trace_header_lines, sampling_factor] = config()
+function [trace_location, trace_header_lines, full_traces_dir, sampling_factor] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Trace options ***************
@@ -6,6 +6,9 @@ function [trace_location, trace_header_lines, sampling_factor] = config()
     trace_location = "../../traces/alibaba/2022-ms/CallGraph/input";
     % how many lines to skip
     trace_header_lines = 1;
+
+    % *************** DIRS ***************
+    full_traces_dir = "full_traces_by_svc";
 
     % *************** Sampling ***************
     % Workload reduction factor
