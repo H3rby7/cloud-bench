@@ -37,11 +37,10 @@ function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
         return
     end
 
-    service = string(T_unique.service{1});
+    as_json = get_trace_string_json(dg);
     timestamp = min(T_unique.timestamp);
-    graph = {dg};
     
-    add(outKVStore, trace_id, table(timestamp, service, trace_id, graph));
+    add(outKVStore, trace_id, table(timestamp, trace_id, as_json));
 end
 
 

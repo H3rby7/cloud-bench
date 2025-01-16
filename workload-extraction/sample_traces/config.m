@@ -1,4 +1,4 @@
-function [trace_location, trace_header_lines, sampling_factor] = config()
+function [trace_location, trace_header_lines, full_traces_dir, sampling_factor] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Trace options ***************
@@ -7,8 +7,18 @@ function [trace_location, trace_header_lines, sampling_factor] = config()
     % how many lines to skip
     trace_header_lines = 1;
 
+    % *************** DIRS ***************
+    full_traces_dir = "full_traces_by_svc";
+
     % *************** Sampling ***************
     % Workload reduction factor
-    sampling_factor = 0.01;
+    % Original Workload is for ~40K baremetal nodes
+    raw_trace_node_count = 40000;
+    % We want to aim at ~10 nodes
+    target_node_count = 10;
+    % Service sampling has already reduced to this factor
+    sampled_service_factor = 0.01;
+    % Sampling factor for traces (~0.025)
+    sampling_factor = (target_node_count / raw_trace_node_count) / sampled_service_factor;
     
 end
