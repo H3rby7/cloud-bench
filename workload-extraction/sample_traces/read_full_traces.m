@@ -42,6 +42,5 @@ function [output] = read_full_traces(service_samples, take_all)
         full_traces = [full_traces; tmp_table];
     end
 
-    ts_minute = floor(single(full_traces.timestamp) / 60000);
-    output = [full_traces table(ts_minute)];
+    output = full_traces;
 end
