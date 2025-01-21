@@ -3,7 +3,7 @@ function [service_samples_export_file, trace_location, trace_header_lines, full_
 
     % *************** Service Samples ***************
     % Result from clustering and sampling the services
-    service_samples_export_file = "../samples_export.mat";
+    service_samples_export_file = "../sampled_services_export.mat";
 
     % *************** Trace options ***************
     % trace_location of alibaba cluster trace microservices v2022
