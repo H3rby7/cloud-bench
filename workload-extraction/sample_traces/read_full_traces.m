@@ -1,5 +1,5 @@
 function [output] = read_full_traces(service_samples, take_all)
-    [~, ~, full_traces_dir, sampling_factor] = config();
+    [~, ~, ~, full_traces_dir, sampling_factor, ~] = config();
     % Result table
     full_traces = table();
     

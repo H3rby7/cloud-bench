@@ -30,7 +30,6 @@ services:
     tty: true
     volumes:
       - ./muBench-WorkModelParameters.json:/root/muBench/WorkModelParameters.json
-      - ./muBench/examples/Alibaba/traces-mbench:/root/muBench/alibaba
+      - ./workload-extraction:/root/muBench/alibaba
       - ./muBench/WorkModelGenerator:/root/muBench/WorkModelGenerator
       - ./generated:/generated
-      - ./traces/alibaba/2021-ms:/trace # Make downloaded alibaba trace avaliable (optional)

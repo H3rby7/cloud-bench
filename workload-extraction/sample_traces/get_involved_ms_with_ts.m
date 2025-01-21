@@ -1,5 +1,5 @@
-function [output] = ms_min_timestamps(traces)
-    % For all involved MS find out when they are first needed.
+function [output] = get_involved_ms_with_ts(traces)
+    % Find all involved MS from trace.json strings
     
     trace_count = height(traces);
     nested_results = cell(trace_count,1);
@@ -20,9 +20,6 @@ function [output] = ms_min_timestamps(traces)
     end
     
     % Combine all sub-results
-    in_flat = vertcat(nested_results{:});
-
-    % Find minimum timestamp for every MS and sort
-    output = sortrows(groupsummary(in_flat, "involved_ms", "min", "timestamp"), "min_timestamp", "ascend");
+    output = vertcat(nested_results{:});
 
 end

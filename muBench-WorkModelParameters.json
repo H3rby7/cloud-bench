@@ -2,7 +2,7 @@
    "WorkModelParameters":{
       "ServiceGraphFilePath": {
          "type": "metadata", 
-         "value":"./alibaba/sequential/app10/service_graph.json"
+         "value":"./alibaba/service_graphs.json"
       },
       "OutputPath": {
          "type":"metadata",
@@ -10,7 +10,7 @@
       },
       "OutputFile": {
          "type":"metadata",
-         "value":"app10-workmodel.json"
+         "value":"alibaba-2022-workmodel.json"
       },
       "request_method":{
          "type": "metadata",
