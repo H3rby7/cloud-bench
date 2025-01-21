@@ -85,7 +85,7 @@
             "threads":16,
             "cpu-requests": "10m",
             "cpu-limits": "10m",
-            "replicas": 2
+            "replicas": 1
          }
       }
    }
