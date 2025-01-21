@@ -76,6 +76,10 @@ Generate WorkModel
 
     python3 WorkModelGenerator/RunWorkModelGen.py -c WorkModelParameters.json
 
+Generate deployment files
+
+    python3 Deployers/K8sDeployer/RunK8sDeployer.py -c K8sParameters.json
+
 # Traces
 
 See [Traces](./traces/)

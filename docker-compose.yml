@@ -30,6 +30,8 @@ services:
     tty: true
     volumes:
       - ./muBench-WorkModelParameters.json:/root/muBench/WorkModelParameters.json
+      - ./muBench-K8sParameters.json:/root/muBench/K8sParameters.json
       - ./workload-extraction:/root/muBench/alibaba
       - ./muBench/WorkModelGenerator:/root/muBench/WorkModelGenerator
+      - ./muBench/Deployers:/root/muBench/Deployers
       - ./generated:/generated

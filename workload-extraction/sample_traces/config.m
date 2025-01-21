@@ -1,4 +1,4 @@
-function [service_samples_export_file, trace_location, trace_header_lines, full_traces_dir, sampling_factor, service_graph_output_file] = config()
+function [service_samples_export_file, trace_location, trace_header_lines, full_traces_dir, sampling_factor, service_graph_output_file, trace_csv_output_file] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Service Samples ***************
@@ -27,6 +27,9 @@ function [service_samples_export_file, trace_location, trace_header_lines, full_
     sampling_factor = (target_node_count / raw_trace_node_count) / sampled_service_factor;
 
     % *************** muBench Outputs ***************
+    % Output file for service graph
     service_graph_output_file = "../service_graphs.json";
-    
+    % Output file for trace CSV
+    trace_csv_output_file = "../sampled_traces.csv";
+
 end

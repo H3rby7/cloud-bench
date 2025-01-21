@@ -20,7 +20,7 @@ function [output] = read_full_traces(service_samples, take_all)
         clust = service_samples.cluster(service_samples.service_id == svc);
     
         % read CSV 
-        input_table = readall(tabularTextDatastore(location, "RowDelimiter", "\n", "Delimiter", "\t"));
+        input_table = readall(tabularTextDatastore(location, "Delimiter", "\t"));
         if ~take_all
             % get trace factor for this service
             trace_factor = service_samples.trace_factor(service_samples.service_id == svc);
