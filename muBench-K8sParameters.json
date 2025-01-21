@@ -1,13 +1,15 @@
 {
    "K8sParameters": {
       "prefix_yaml_file":"mubench",
-      "namespace": "default",
+      "namespace": "mubench",
       "image": "msvcbench/microservice_v6-screen:1.0",
       "cluster_domain": "cluster",
       "path": "/api/v1",
       "sleep": 1,
       "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
       "scheduler-name": "default-scheduler",
+      "service-type": "ClusterIP",
+      "create-ingress": true,
       "sleep": 0,
       "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
       "nginx-gw": false,

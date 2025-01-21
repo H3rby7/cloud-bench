@@ -15,6 +15,7 @@ Contents:
     - [muBench and Alibaba Trace 2021](#mubench-and-alibaba-trace-2021)
 - [Traces](#traces)
 - [Acknowledgements](#acknowledgements)
+- [Kubectl](#kubectl)
 
 # Tool Installation
 
@@ -87,3 +88,15 @@ See [Traces](./traces/)
 # Acknowledgements
 
 This product includes software developed by University of Rome Tor Vergata and its contributors.
+
+# Kubectl
+
+Get the kubeconfig from the server
+
+    sh get-kubeconfig.sh
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml info
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml create ns mubench
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml -nmubench get all
