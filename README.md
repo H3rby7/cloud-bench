@@ -101,7 +101,7 @@ Get the kubeconfig from the server
 
 Get public IP address for nginx
 
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml get svc nginx-ingress-nginx-controller | awk -F ' ' '{print $4}'
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml -nnginx get svc nginx-ingress-nginx-controller | awk -F ' ' '{print $4}'
 
 ## Deploy muBench
 
