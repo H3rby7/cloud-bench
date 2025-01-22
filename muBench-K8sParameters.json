@@ -10,6 +10,7 @@
       "scheduler-name": "default-scheduler",
       "service-type": "ClusterIP",
       "create-ingress": true,
+      "create-service-monitor": true,
       "sleep": 0,
       "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
       "nginx-gw": false,

@@ -109,16 +109,20 @@ Create namespace for muBench
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml create ns mubench
 
-Deploy the required configmaps
+Deploy everything
 
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapInternalServices.yaml
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapWorkmodel.yam
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\
 
 Get all resources of muBench
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml -nmubench get all
 
-Deploy one service (ms-500) as a test
+Deploying only the required configmaps
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapInternalServices.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapWorkmodel.yam
+
+Deploy one service (ms-500 - as a test)
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Deployment-ms-500.yaml
     kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Service-ms-500.yaml

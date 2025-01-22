@@ -2,7 +2,7 @@
    "WorkModelParameters":{
       "ServiceGraphFilePath": {
          "type": "metadata", 
-         "value":"./alibaba/service_graphs.json"
+         "value":"./alibaba/service_500.json"
       },
       "OutputPath": {
          "type":"metadata",
