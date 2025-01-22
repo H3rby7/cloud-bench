@@ -16,6 +16,7 @@ Contents:
 - [Traces](#traces)
 - [Acknowledgements](#acknowledgements)
 - [Kubectl](#kubectl)
+  - [Deploy muBench](#deploy-mubench)
 
 # Tool Installation
 
@@ -94,9 +95,31 @@ This product includes software developed by University of Rome Tor Vergata and i
 Get the kubeconfig from the server
 
     sh get-kubeconfig.sh
+    # Piped shortcut
+    #      the SSH command copied from cloudlab web                                                                your ssh key location
+    echo ssh user@inst001.some.cloudlab.domain | awk -F ' ' '{print $2}' | awk -F '@' '{print $1}{print $2}{print "cloudlab"}' | sh get-kubeconfig.sh
 
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml info
+Get public IP address for nginx
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml get svc nginx-ingress-nginx-controller | awk -F ' ' '{print $4}'
+
+## Deploy muBench
+
+Create namespace for muBench
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml create ns mubench
 
+Deploy the required configmaps
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapInternalServices.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-ConfigMapWorkmodel.yam
+
+Get all resources of muBench
+
     kubectl --kubeconfig cloudlab_kubeconfig.yaml -nmubench get all
+
+Deploy one service as a test
+
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Deployment-ms-500.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Service-ms-500.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Ingress-ms-500.yaml
