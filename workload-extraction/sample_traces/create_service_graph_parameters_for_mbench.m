@@ -11,7 +11,7 @@ function create_service_graph_parameters_for_mbench(involved_ms, outputFile)
     % and traces
     js = "{";
     for i = 1:length(involved_ms)
-        js = js + char(34)+involved_ms(i)+char(34)+jsbody;
+        js = js + char(34)+k8s_conformous(involved_ms(i))+char(34)+jsbody;
         if i~=length(involved_ms)
             js = js + ",";
         end

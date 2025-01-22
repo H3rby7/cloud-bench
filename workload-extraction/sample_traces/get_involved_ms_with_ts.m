@@ -4,7 +4,8 @@ function [output] = get_involved_ms_with_ts(traces)
     trace_count = height(traces);
     nested_results = cell(trace_count,1);
     
-    parfor i=1:trace_count
+    % parfor is possible
+    for i=1:trace_count
         entry = traces(i, :);
 
         % Parse involved microservices from JSON
