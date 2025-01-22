@@ -83,8 +83,8 @@
             },
             "workers":4,
             "threads":16,
-            "cpu-requests": "10m",
-            "cpu-limits": "10m",
+            "cpu-requests": "50m",
+            "cpu-limits": "100m",
             "replicas": 1
          }
       }

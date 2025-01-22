@@ -2,7 +2,7 @@
    "K8sParameters": {
       "prefix_yaml_file":"mubench",
       "namespace": "mubench",
-      "image": "msvcbench/microservice_v6-screen:1.0",
+      "image": "lujoka/mub-cell:latest",
       "cluster_domain": "cluster",
       "path": "/api/v1",
       "sleep": 1,

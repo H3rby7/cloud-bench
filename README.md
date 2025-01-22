@@ -118,8 +118,8 @@ Get all resources of muBench
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml -nmubench get all
 
-Deploy one service as a test
+Deploy one service (ms-500) as a test
 
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Deployment-ms-500.yaml
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Service-ms-500.yaml
-    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00010-Ingress-ms-500.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Deployment-ms-500.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Service-ms-500.yaml
+    kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Ingress-ms-500.yaml
