@@ -82,6 +82,10 @@ Generate deployment files
 
     python3 Deployers/K8sDeployer/RunK8sDeployer.py -c K8sParameters.json
 
+Run traces
+
+    python3 Benchmarks/Runner/CSVTraceRunner.py -c RunnerParameters.json
+
 # Traces
 
 See [Traces](./traces/)

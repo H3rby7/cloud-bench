@@ -56,10 +56,10 @@ function [output] = export_traces_for_mubench(entries)
     output = sortrows(flattened, "timestamp", "ascend");
 end
 
-function [output] = split_trace(full_json, ingress_services)
+function [output] = split_trace(full_json, ingress_service)
     % full_json contains 'USER' wrappe json, which may have multiple
     % children (ingress services)
-    ingress_count = height(ingress_services);
+    ingress_count = height(ingress_service);
 
     % Prepare cell holding our traces (per ingress service)
     as_json = cell(ingress_count, 1);
@@ -76,7 +76,7 @@ function [output] = split_trace(full_json, ingress_services)
     for i=sort(1:ingress_count, "desc")
         % Find Start of the sub_trace, by looking for the svc name
         % and taking two additional characters -> {"
-        startpos = strfind(json2process, ingress_services{i}) - 3;
+        startpos = strfind(json2process, ingress_service{i}) - 3;
 
         % For the trace take everything after {"ms-xyz
         as_json{i} = extractAfter(json2process, startpos);
@@ -86,5 +86,5 @@ function [output] = split_trace(full_json, ingress_services)
     end
 
     % Output the ingress services with their trace
-    output = table(ingress_services, as_json);
+    output = table(ingress_service, as_json);
 end

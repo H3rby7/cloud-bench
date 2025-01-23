@@ -31,8 +31,10 @@ services:
     volumes:
       - ./muBench-WorkModelParameters.json:/root/muBench/WorkModelParameters.json
       - ./muBench-K8sParameters.json:/root/muBench/K8sParameters.json
+      - ./muBench-RunnerParameters.json:/root/muBench/RunnerParameters.json
       - ./workload-extraction:/root/muBench/alibaba
       - ./muBench/Autopilots:/root/muBench/Autopilots
+      - ./muBench/Benchmarks:/root/muBench/Benchmarks
       - ./muBench/CustomFunctions:/root/muBench/CustomFunctions
       - ./muBench/Deployers:/root/muBench/Deployers
       - ./muBench/ServiceCell:/root/muBench/ServiceCell
