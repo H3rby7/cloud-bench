@@ -2,7 +2,7 @@
    "K8sParameters": {
       "prefix_yaml_file":"mubench",
       "namespace": "mubench",
-      "image": "lujoka/mub-cell:latest",
+      "image": "lujoka/mub-cell:0.1.1",
       "cluster_domain": "cluster",
       "path": "/api/v1",
       "sleep": 1,

@@ -127,3 +127,7 @@ Deploy one service (ms-500 - as a test)
     kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Deployment-ms-500.yaml
     kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Service-ms-500.yaml
     kubectl --kubeconfig cloudlab_kubeconfig.yaml apply -f generated\muBench\k8s\yamls\mubench-00050-Ingress-ms-500.yaml
+
+Test CURL
+
+    curl --header "Content-Type: application/json" --request POST --data "{\"ms-500\":[{}]}" http://some.public.ip.addrs/ms-500/api/v1
