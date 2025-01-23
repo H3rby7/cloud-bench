@@ -1,13 +1,15 @@
 function [output] = to_mubench_trace_json(input)
-    % Remove "USER" from json
+    % Take all json 'below' "USER" node
     % Make names k8s-conformous
-
-    % TODO: using struct conversion the [{"svc":[{}]}] bracket construct
-    % breaks, need to work with string magic instead!
     output = cell(height(input),1);
     for i=1:height(input)
-        as_struct = jsondecode(input{i});
-        w_o_user = jsonencode(as_struct.USER);
-        output{i} = k8s_conformous(w_o_user);
+        % rm 'USER' from json string
+        w_o_user = extractAfter(input(i),'{"USER":[');
+        str_len = strlength(w_o_user);
+        % rm corresponding brackets from json string
+        % We want to remove the last two characters, since this function is
+        % suddenly 0-indexed we work with str_len - 1
+        valid_json = extractBefore(w_o_user, str_len -1);
+        output{i} = k8s_conformous(valid_json);
     end
 end
