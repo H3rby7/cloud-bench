@@ -32,6 +32,10 @@ services:
       - ./muBench-WorkModelParameters.json:/root/muBench/WorkModelParameters.json
       - ./muBench-K8sParameters.json:/root/muBench/K8sParameters.json
       - ./workload-extraction:/root/muBench/alibaba
-      - ./muBench/WorkModelGenerator:/root/muBench/WorkModelGenerator
+      - ./muBench/Autopilots:/root/muBench/Autopilots
+      - ./muBench/CustomFunctions:/root/muBench/CustomFunctions
       - ./muBench/Deployers:/root/muBench/Deployers
+      - ./muBench/ServiceCell:/root/muBench/ServiceCell
+      - ./muBench/ServiceGraphGenerator:/root/muBench/ServiceGraphGenerator
+      - ./muBench/WorkModelGenerator:/root/muBench/WorkModelGenerator
       - ./generated:/generated
