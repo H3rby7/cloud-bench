@@ -37,9 +37,14 @@ function trace_reducer(trace_id, intermValIter, outKVStore, empty_table)
         return
     end
 
+    % Possible improvement:
+    % generate JSON without "USER" node
+    % (as of now we remove it later-on)
     as_json = get_trace_string_json(dg);
     timestamp = min(T_unique.timestamp);
     
+    % Possible improvement:
+    % also store the ingress service (where the trace request will go)
     add(outKVStore, trace_id, table(timestamp, trace_id, as_json));
 end
 
