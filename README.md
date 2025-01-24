@@ -13,6 +13,7 @@ Contents:
     - [Spar - Genereting traces](#spar---genereting-traces)
   - [muBench - Demo Microservice Generator](#mubench---demo-microservice-generator)
     - [muBench and Alibaba Trace 2021](#mubench-and-alibaba-trace-2021)
+  - [Run traces](#run-traces)
 - [Traces](#traces)
 - [Acknowledgements](#acknowledgements)
 - [Kubectl](#kubectl)
@@ -82,9 +83,12 @@ Generate deployment files
 
     python3 Deployers/K8sDeployer/RunK8sDeployer.py -c K8sParameters.json
 
-Run traces
+## Run traces
 
-    python3 Benchmarks/Runner/CSVTraceRunner.py -c RunnerParameters.json
+    docker-compose up runner -d
+    docker-compose exec -it runner bash
+
+    ./entrypoint.sh --log-level DEBUG
 
 # Traces
 

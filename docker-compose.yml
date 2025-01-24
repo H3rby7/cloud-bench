@@ -31,13 +31,19 @@ services:
     volumes:
       - ./muBench-WorkModelParameters.json:/root/muBench/WorkModelParameters.json
       - ./muBench-K8sParameters.json:/root/muBench/K8sParameters.json
-      - ./muBench-RunnerParameters.json:/root/muBench/RunnerParameters.json
       - ./workload-extraction:/root/muBench/alibaba
-      - ./muBench/Autopilots:/root/muBench/Autopilots
-      - ./muBench/Benchmarks:/root/muBench/Benchmarks
       - ./muBench/CustomFunctions:/root/muBench/CustomFunctions
       - ./muBench/Deployers:/root/muBench/Deployers
-      - ./muBench/ServiceCell:/root/muBench/ServiceCell
-      - ./muBench/ServiceGraphGenerator:/root/muBench/ServiceGraphGenerator
       - ./muBench/WorkModelGenerator:/root/muBench/WorkModelGenerator
       - ./generated:/generated
+
+  runner:
+    image: "lujoka/mub-csv-runner:latest"
+    pull_policy: always
+    entrypoint: /bin/bash
+    working_dir: /app
+    tty: true
+    volumes:
+      - ./muBench-RunnerParameters.json:/app/RunnerParameters.json
+      - ./workload-extraction/sampled_traces.csv:/app/sampled_traces.csv
+      - ./results:/app/results

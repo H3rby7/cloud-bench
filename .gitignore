@@ -7,3 +7,6 @@ cloudlab_kubeconfig.yaml
 # Ignore SSH keys
 cloudlab
 cloudlab.pub
+
+results/*
+!.gitkeep
