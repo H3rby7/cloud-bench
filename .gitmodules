@@ -7,3 +7,9 @@
 [submodule "cloudlab-k8s-ee-sched"]
 	path = cloudlab-k8s-ee-sched
 	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched
+[submodule "muBench-csv-runner"]
+	path = muBench-csv-runner
+	url = https://github.com/H3rby7/muBench-csv-runner.git
+[submodule "muBench-svc-cell"]
+	path = muBench-svc-cell
+	url = https://github.com/H3rby7/muBench-svc-cell.git
