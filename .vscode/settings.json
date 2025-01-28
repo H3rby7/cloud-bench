@@ -3,5 +3,10 @@
       // Exclude system DIRs of external drive
       "**/System Volume Information": true,
       "**/$RECYCLE.BIN": true,
+      "muBench/examples/Alibaba/**/results": true
+  },
+  "yaml.schemas": {
+    "Kubernetes": "*.yaml",
+    "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-workflow.json": "workflows/*.yaml"
   }
 }

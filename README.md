@@ -18,6 +18,7 @@ Contents:
 - [Acknowledgements](#acknowledgements)
 - [Kubectl](#kubectl)
   - [Deploy muBench](#deploy-mubench)
+  - [Deploy Runner](#deploy-runner)
 
 # Tool Installation
 
@@ -113,6 +114,8 @@ Get public IP address for nginx
 
 ## Deploy muBench
 
+Deploying muBench service-cells manually:
+
 Create namespace for muBench
 
     kubectl --kubeconfig cloudlab_kubeconfig.yaml create ns mubench
@@ -139,3 +142,5 @@ Deploy one service (ms-500 - as a test)
 Test CURL
 
     curl --header "Content-Type: application/json" --request POST --data "{\"ms-500\":[{}]}" http://some.public.ip.addrs/ms-500/api/v1
+
+## Deploy Runner
