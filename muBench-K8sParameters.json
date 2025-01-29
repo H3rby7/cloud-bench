@@ -5,15 +5,11 @@
       "image": "lujoka/mub-cell:0.1.1",
       "cluster_domain": "cluster",
       "path": "/api/v1",
-      "sleep": 1,
       "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
       "scheduler-name": "default-scheduler",
       "service-type": "ClusterIP",
       "create-ingress": true,
-      "create-service-monitor": true,
-      "sleep": 0,
-      "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
-      "no-apply": true
+      "create-service-monitor": true
    },
    "InternalServiceFilePath": "CustomFunctions",
    "OutputPath": "/generated/muBench/k8s",
