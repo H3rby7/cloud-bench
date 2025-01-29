@@ -13,3 +13,9 @@
 [submodule "muBench-svc-cell"]
 	path = muBench-svc-cell
 	url = https://github.com/H3rby7/muBench-svc-cell.git
+[submodule "muBench-k8s-templater"]
+	path = muBench-k8s-templater
+	url = https://github.com/H3rby7/muBench-k8s-templater.git
+[submodule "cloudlab-k8s-ee-sched-data"]
+	path = cloudlab-k8s-ee-sched-data
+	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched-data.git
