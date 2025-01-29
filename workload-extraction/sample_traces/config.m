@@ -1,4 +1,4 @@
-function [service_samples_export_file, trace_location, trace_header_lines, full_traces_dir, sampling_factor, service_graph_output_file, trace_csv_output_file] = config()
+function [service_samples_export_file, trace_location, trace_header_lines, full_traces_dir, sampling_factor, service_graph_output_file, trace_csv_output_file, deployment_ts_output_file] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Service Samples ***************
@@ -31,5 +31,7 @@ function [service_samples_export_file, trace_location, trace_header_lines, full_
     service_graph_output_file = "../service_graphs.json";
     % Output file for trace CSV
     trace_csv_output_file = "../sampled_traces.csv";
-
+    % Output file for CSV containing the microservices with their earliest
+    % call timestamp (when are they first required?)
+    deployment_ts_output_file = "../sampled_deployment_ts.csv";
 end
