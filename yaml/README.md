@@ -1,5 +1,7 @@
 # YAMLs for Kubernetes
 
+Must deploy to namespace default, because of the service account defined in [rbac.yaml](rbac.yaml).
+
 ## Debugging File mounts
 
 Replace a container's `command` line with a sleep statement:
