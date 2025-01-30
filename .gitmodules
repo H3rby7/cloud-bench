@@ -19,3 +19,6 @@
 [submodule "cloudlab-k8s-ee-sched-data"]
 	path = cloudlab-k8s-ee-sched-data
 	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched-data.git
+[submodule "cloudlab-k8s-ee-sched-functions"]
+	path = cloudlab-k8s-ee-sched-functions
+	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched-functions.git
