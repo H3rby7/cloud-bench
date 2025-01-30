@@ -39,14 +39,14 @@ spec:
         - name: dataset
           mountPath: "/dataset"
           readOnly: true
+        - name: functions
+          mountPath: "/InternalServiceFunctions"
+          readOnly: true
         - name: podshared
           mountPath: "/podshared"
           readOnly: false
         - name: k8s-params
           mountPath: "/config"
-          readOnly: true
-        - name: internal-services
-          mountPath: "/InternalServiceFunctions"
           readOnly: true
       containers:
       - name: runner

@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: k8s-params
   labels:
-    benchmark: input
+    benchmark: params
 data:
   K8sParameters.json: |
     {

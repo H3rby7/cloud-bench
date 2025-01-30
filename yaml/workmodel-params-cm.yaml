@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: k8s-params
+  name: workmodel-params
   labels:
-    benchmark: input
+    benchmark: params
 data:
   WorkmodelParameters.json: |
     {

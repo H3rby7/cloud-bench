@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: csv-runner-params
   labels:
-    benchmark: input
+    benchmark: params
 data:
   RunnerParameters.json: |
     {
