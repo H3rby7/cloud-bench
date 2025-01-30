@@ -2,7 +2,7 @@ generated
 *.asv
 
 # Ignore kubeconfig
-cloudlab_kubeconfig.yaml
+*kubeconfig.yaml
 
 # Ignore SSH keys
 cloudlab
