@@ -9,14 +9,11 @@ spec:
     spec:
       serviceAccountName: benchmark-sa
       initContainers:
+      ################################## WORKMODEL GENERATION ##################################
       - name: workmodel-gen
         image: lujoka/mub-workmodel-gen:latest
         imagePullPolicy: Always
-        # The actual command
-        # command: ["/app/entrypoint.sh", "--config-file", "/config/WorkmodelParameters.json", "--log-level", "DEBUG", "-y"]
-        # Sleep command so we can exec into the container and see all file paths work
-        command: ["/bin/bash", "-c", "--"]
-        args: [ "while true; do sleep 30; done;" ]
+        command: ["/app/entrypoint.sh", "--config-file", "/config/WorkmodelParameters.json", "--log-level", "DEBUG"]
         volumeMounts:
         - name: dataset
           mountPath: "/dataset"
@@ -27,14 +24,11 @@ spec:
         - name: workmodel-params
           mountPath: "/config"
           readOnly: true
+      ################################## TEMPLATING K8S FILES ##################################
       - name: templater
         image: lujoka/mub-k8s-templater:latest
         imagePullPolicy: Always
-        # The actual command
-        # command: ["/app/entrypoint.sh", "--config-file", "/config/K8sParameters.json", "--log-level", "DEBUG", "-y"]
-        # Sleep command so we can exec into the container and see all file paths work
-        command: ["/bin/bash", "-c", "--"]
-        args: [ "while true; do sleep 30; done;" ]
+        command: ["/app/entrypoint.sh", "--config-file", "/config/K8sParameters.json", "--log-level", "DEBUG", "-y"]
         volumeMounts:
         - name: dataset
           mountPath: "/dataset"
@@ -49,14 +43,11 @@ spec:
           mountPath: "/config"
           readOnly: true
       containers:
+      ################################## RUNNING THE TRACE ##################################
       - name: runner
         image: lujoka/mub-csv-runner:latest
         imagePullPolicy: Always
-        # The actual command
-        # command: ["/app/entrypoint.sh", "--config-file", "/config/RunnerParameters.json"]
-        # Sleep command so we can exec into the container and see all file paths work
-        command: ["/bin/bash", "-c", "--"]
-        args: [ "while true; do sleep 30; done;" ]
+        command: ["/app/entrypoint.sh", "--config-file", "/config/RunnerParameters.json"]
         volumeMounts:
         - name: dataset
           mountPath: "/dataset"

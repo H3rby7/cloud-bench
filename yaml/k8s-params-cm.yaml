@@ -16,7 +16,7 @@ data:
           "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
           "scheduler-name": "default-scheduler",
           "service-type": "ClusterIP",
-          "create-ingress": true,
+          "create-ingress": false,
           "create-service-monitor": true
       },
       "InternalServiceFilePath": "/InternalServiceFunctions",
