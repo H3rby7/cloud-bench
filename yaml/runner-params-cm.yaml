@@ -8,8 +8,8 @@ data:
   RunnerParameters.json: |
     {
       "RunnerParameters":{
-          "traces_file_path": "./traces.csv",
-          "deployment_ts_file_path": "./deployment_ts.csv",
+          "traces_file_path": "/dataset/traces.csv",
+          "deployment_ts_file_path": "/dataset/deployment_ts.csv",
           "yaml_dir_path": "/podshared/yamls",
           "k8s_namespace": "mubench",
           "deployments_headstart_in_s": 30,
