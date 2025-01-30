@@ -76,6 +76,9 @@ Start and exec into container
     docker-compose up mubench -d
     docker-compose exec -it mubench bash
 
+TODO: Use a seed when randomly selecting the service function
+TODO: Mixed workloads function
+
 Generate WorkModel
 
     python3 WorkModelGenerator/RunWorkModelGen.py -c WorkModelParameters.json
