@@ -4,14 +4,14 @@ metadata:
   namespace: default
   name: benchmark-sa
   labels:
-    benchmark: input
+    benchmark: controller
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kubectl-rolebinding
   labels:
-    benchmark: input
+    benchmark: controller
 subjects:
   - kind: ServiceAccount
     name: benchmark-sa

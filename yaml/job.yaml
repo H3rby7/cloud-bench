@@ -3,9 +3,12 @@ kind: Job
 metadata:
   name: cloud-ee-benchmarking
   labels:
-    benchmark: input
+    benchmark: controller
 spec:
   template:
+    metadata:
+      labels:
+        benchmark: controller
     spec:
       serviceAccountName: benchmark-sa
       initContainers:
@@ -48,6 +51,9 @@ spec:
         image: lujoka/mub-csv-runner:latest
         imagePullPolicy: Always
         command: ["/app/entrypoint.sh", "--config-file", "/config/RunnerParameters.json"]
+        ports:
+          - name: metrics
+            containerPort: 8080
         volumeMounts:
         - name: dataset
           mountPath: "/dataset"

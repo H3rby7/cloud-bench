@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cloud-ee-benchmarking
+  labels:
+    benchmark: controller
+spec:
+  selector:
+    matchLabels:
+      benchmark: controller
+  podMetricsEndpoints:
+  - port: metrics
+    path: /
+    interval: 10s
