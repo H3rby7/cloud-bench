@@ -22,3 +22,6 @@
 [submodule "cloudlab-k8s-ee-sched-functions"]
 	path = cloudlab-k8s-ee-sched-functions
 	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched-functions.git
+[submodule "muBench-workmodel-gen"]
+	path = muBench-workmodel-gen
+	url = https://github.com/H3rby7/muBench-workmodel-gen.git
