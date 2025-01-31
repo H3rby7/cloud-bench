@@ -7,6 +7,7 @@ function [service_samples_export_file, trace_location, trace_header_lines, full_
 
     % *************** Trace options ***************
     % trace_location of alibaba cluster trace microservices v2022
+    % With the first 20 files to cover a one-hour interval
     trace_location = "../../traces/alibaba/2022-ms/CallGraph/input";
     % how many lines to skip
     trace_header_lines = 1;

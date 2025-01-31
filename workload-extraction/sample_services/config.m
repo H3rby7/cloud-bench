@@ -3,6 +3,7 @@ function [trace_location, trace_header_lines, output_dir_sequential, output_dir_
 
     % *************** Trace options ***************
     % trace_location of alibaba cluster trace microservices v2022
+    % Sample only from the first hour as the spectral cluster algorithm does not perform well with large(r) input
     trace_location = "../../traces/alibaba/2022-ms/CallGraph/CallGraph_0.csv";
     % how many lines to skip
     trace_header_lines = 1;
