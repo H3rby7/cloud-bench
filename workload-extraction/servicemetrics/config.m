@@ -1,4 +1,4 @@
-function [service_samples_export_file, ms_metrics_location, ms_metrics_header_lines, ms_metrics_max_timestamp, metrics_output_file] = config()
+function [service_samples_export_file, ms_metrics_location, ms_metrics_header_lines, ms_metrics_max_timestamp, full_traces_dir, metrics_output_file] = config()
     % Adjust the variables in this block to your needs and conditions
 
     % *************** Service Samples ***************
@@ -17,6 +17,10 @@ function [service_samples_export_file, ms_metrics_location, ms_metrics_header_li
     ms_metrics_header_lines = 1;
     % maximum timestamp (1 hour)
     ms_metrics_max_timestamp = 60 * 60 * 1000;
+
+    % *************** DIRS ***************
+    % Intermediate result dir when reading full traces for sampled services.
+    full_traces_dir = "../full_traces_by_svc";
 
     % *************** Outputs ***************
     % Output file for metrics extrema
