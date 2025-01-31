@@ -14,7 +14,7 @@ function [service_samples_export_file, trace_location, trace_header_lines, full_
 
     % *************** DIRS ***************
     % Intermediate result dir when reading full traces for sampled services.
-    full_traces_dir = "full_traces_by_svc";
+    full_traces_dir = "../full_traces_by_svc";
 
     % *************** Sampling ***************
     % Workload reduction factor
