@@ -24,6 +24,6 @@ function [service_samples_export_file, ms_metrics_location, ms_metrics_header_li
 
     % *************** Outputs ***************
     % Output file for metrics extrema
-    metrics_output_file = "../metrics.csv";
+    metrics_output_file = "../metrics_stats_normalized.csv";
 
 end
