@@ -1,6 +1,3 @@
-[submodule "muBench"]
-	path = muBench
-	url = https://github.com/H3rby7/muBench.git
 [submodule "trace-generator"]
 	path = trace-generator
 	url = https://github.com/H3rby7/trace-generator
