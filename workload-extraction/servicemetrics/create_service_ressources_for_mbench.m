@@ -13,8 +13,10 @@ function create_service_ressources_for_mbench(ressources, outputFile)
         js = js + char(34)+"max"+char(34)+":"+ressources.max_cpu_utilization(i)+"},";
         % ADD "memory":{
         js = js + char(34)+"memory"+char(34)+":{";
+        % ADD "min":VAL,
+        js = js + char(34)+"min"+char(34)+":"+ressources.min_memory_utilization(i)+",";
         % ADD "mean":VAL},
-        js = js + char(34)+"mean"+char(34)+":"+ressources.mean_memory_utilization(i)+"},";
+        js = js + char(34)+"max"+char(34)+":"+ressources.max_memory_utilization(i)+"},";
         % ADD "disk":{
         js = js + char(34)+"disk"+char(34)+":{";
         % ADD "mean":VAL}}
