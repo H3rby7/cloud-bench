@@ -76,8 +76,7 @@ Start and exec into container
     docker-compose up mubench -d
     docker-compose exec -it mubench bash
 
-TODO: Mixed workloads function
-TODO:  msg="Error on ingesting samples with different value but same timestamp" component="scrape manager" scrape_pool=serviceMonitor/mubench/mubench-service-cell/0
+TODO: Prometheus scrape "Error on ingesting samples with different value but same timestamp" component="scrape manager" scrape_pool=serviceMonitor/mubench/mubench-service-cell/0
 TODO: Update docker-compose to use the newly created containers.
 TODO: Update this README for the new docker-compose
 
