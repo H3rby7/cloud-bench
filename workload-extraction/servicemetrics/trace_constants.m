@@ -1,4 +1,4 @@
-function [trace_header, trace_formats, trace_vartypes] = trace_constants()
+function [trace_header, trace_formats] = trace_constants()
     % Constants, do not change!
 
     % trace table header
@@ -9,6 +9,5 @@ function [trace_header, trace_formats, trace_vartypes] = trace_constants()
     % when reading in the tabularDatastore
     % We work around this by treating everything as '%s' and parse it ourselves within the code
     trace_formats = ["%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s"];
-    trace_vartypes = {'uint64', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'double'};
     
 end

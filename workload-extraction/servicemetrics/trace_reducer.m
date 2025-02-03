@@ -1,6 +1,6 @@
-function trace_reducer(ms_name, intermValIter, outKVStore, empty_table)
+function trace_reducer(ms_name, intermValIter, outKVStore)
     ms_name = string(ms_name);
-    T = empty_table;
+    T = table();
     
     % Append all entries we have to the table
     while hasnext(intermValIter)

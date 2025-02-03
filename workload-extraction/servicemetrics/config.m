@@ -15,8 +15,8 @@ function [service_samples_export_file, ms_metrics_location, ms_metrics_header_li
     ms_metrics_location = "../../traces/alibaba/2022-ms/MsMetrics/input";
     % how many lines to skip
     ms_metrics_header_lines = 1;
-    % maximum timestamp (1 hour)
-    ms_metrics_max_timestamp = 60 * 60 * 1000;
+    % maximum timestamp (12 hours)
+    ms_metrics_max_timestamp = 12 * 60 * 60 * 1000;
 
     % *************** DIRS ***************
     % Intermediate result dir when reading full traces for sampled services.
