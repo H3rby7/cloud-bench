@@ -98,4 +98,4 @@ spec:
         - name: runner-params
           configMap:
             name: csv-runner-params
-  backoffLimit: 1
+  backoffLimit: 0

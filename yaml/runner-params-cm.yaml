@@ -21,6 +21,7 @@ data:
       },
       "in_cluster": true,
       "OutputPath": "./results",
-      "ResultFilePrefix": "result"
+      "ResultFilePrefix": "result",
+      "ttlMinutesAfterFinished": 600
     }
 
