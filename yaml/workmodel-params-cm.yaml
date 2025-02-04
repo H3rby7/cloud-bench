@@ -19,7 +19,7 @@ data:
             "filePath":"/resources/cluster_ressources.json"
           },
           "Output": {
-            "directory":"/generated",
+            "directory":"/podshared",
             "fileName":"workmodel.json"
           },
           "InternalService": {
