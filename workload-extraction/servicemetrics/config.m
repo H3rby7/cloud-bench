@@ -7,12 +7,12 @@ function [service_samples_export_file, ms_metrics_location, ms_metrics_header_li
 
     % *************** Metrics options ***************
     % metrics_location of alibaba cluster trace microservices v2022
-    ms_metrics_location = "../../traces/alibaba/2022-ms/MsMetrics/MSMetricsUpdate_test.csv";
+    % ms_metrics_location = "../../traces/alibaba/2022-ms/MsMetrics/MSMetricsUpdate_test.csv";
 
     % with the first two files to cover our one hour interval
     % https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2022MicroservicesTraces/MSMetricsUpdate/MSMetricsUpdate_0.tar.gz
     % https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2022MicroservicesTraces/MSMetricsUpdate/MSMetricsUpdate_1.tar.gz
-    % ms_metrics_location = "../../traces/alibaba/2022-ms/MsMetrics/input";
+    ms_metrics_location = "../../traces/alibaba/2022-ms/MsMetrics/input";
     % how many lines to skip
     ms_metrics_header_lines = 1;
     % maximum timestamp (12 hours)
