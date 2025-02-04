@@ -7,9 +7,9 @@ metadata:
 data:
   cluster_ressources.json: |
     {
-      "node_count": 2,
-      "nodes_total_cpu": 20,
-      "nodes_total_memory": 32000,
+      "node_count": 10,
+      "nodes_total_cpu": 100,
+      "nodes_total_memory": 160000,
       "target_mean_cpu": 0.2006,
       "target_mean_memory": 0.2708
     }

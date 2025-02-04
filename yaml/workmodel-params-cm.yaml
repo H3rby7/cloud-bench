@@ -40,7 +40,7 @@ data:
           },
           "Kubernetes": {
             "replicas": 1,
-            "base_cpu": 10,
+            "base_cpu": 20,
             "base_memory": 60
           }
       }
