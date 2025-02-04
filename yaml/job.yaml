@@ -27,6 +27,9 @@ spec:
         - name: workmodel-params
           mountPath: "/config"
           readOnly: true
+        - name: cluster-resources
+          mountPath: "/resources"
+          readOnly: true
       ################################## TEMPLATING K8S FILES ##################################
       - name: templater
         image: lujoka/mub-k8s-templater:latest
@@ -78,6 +81,10 @@ spec:
         - name: result
           persistentVolumeClaim:
             claimName: result
+        # Workaround while we do not create cluster-resources with the cloudlab profile.
+        - name: cluster-resources
+          configMap:
+            name: cluster-resources
         ## EmptyDIR to share the generated files between (init-)containers
         - name: podshared
           emptyDir: {}

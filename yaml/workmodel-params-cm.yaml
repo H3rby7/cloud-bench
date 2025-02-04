@@ -8,45 +8,40 @@ data:
   WorkmodelParameters.json: |
     {
       "WorkModelParameters":{
-        "ServiceGraphFilePath": {
-          "type": "metadata",
-          "value":"./service_graphs.json"
-        },
-        "ServiceRessourcesFilePath": {
-          "type": "metadata",
-          "value":"./service_ressources.json"
-        },
-        "OutputPath": {
-          "type":"metadata",
-          "value":"/generated"
-        },
-        "OutputFile": {
-          "type":"metadata",
-          "value":"workmodel.json"
-        },
-        "InternalService": {
-          "factor_cpu": 10000,
-          "thread_pool_size": 1,
-          "trials": 1,
-          "factor_memory": 100000,
-          "memory_io": 1000,
-          "factor_disk": 10000,
-          "disk_write_block_size": 1024,
-          "tmp_file_name": "mubtestfile.txt",
-          "mean_response_size": 10
-        },
-        "Gunicorn": {
-          "request_method": "rest",
-          "workers": 4,
-          "threads": 16
-        },
-        "Kubernetes": {
-          "replicas": 1,
-          "base_cpu": 10,
-          "base_memory": 60,
-          "factor_cpu": 1000,
-          "factor_memory_requests": 1000,
-          "factor_memory_limits": 5000
-        }
+          "ServiceGraph": {
+            "filePath":"/dataset/service_graphs.json"
+          },
+          "ServiceRessources": {
+            "filePath":"/dataset/min_max_normalized_service_metrics.csv",
+            "csvDelimiter": "\t"
+          },
+          "ClusterRessources": {
+            "filePath":"/resources/cluster_ressources.json"
+          },
+          "Output": {
+            "directory":"/generated",
+            "fileName":"workmodel.json"
+          },
+          "InternalService": {
+            "factor_cpu": 1.1,
+            "thread_pool_size": 1,
+            "trials": 1,
+            "factor_memory": 1.1,
+            "memory_io": 1000,
+            "disk_write_block_count": 1000,
+            "disk_write_block_size": 1024,
+            "tmp_file_name": "mubtestfile.txt",
+            "mean_response_size": 11
+          },
+          "Gunicorn": {
+            "request_method": "rest",
+            "workers": 4,
+            "threads": 16
+          },
+          "Kubernetes": {
+            "replicas": 1,
+            "base_cpu": 10,
+            "base_memory": 60
+          }
       }
     }

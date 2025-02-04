@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-resources
+  labels:
+    benchmark: params
+data:
+  cluster_ressources.json: |
+    {
+      "node_count": 2,
+      "nodes_total_cpu": 20,
+      "nodes_total_memory": 32000,
+      "target_mean_cpu": 0.2006,
+      "target_mean_memory": 0.2708
+    }
