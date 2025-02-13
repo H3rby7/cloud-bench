@@ -24,7 +24,7 @@ data:
           },
           "InternalService": {
             "factor_cpu": 5.0,
-            "thread_pool_size": 2,
+            "thread_pool_size": 1,
             "trials": 1,
             "factor_memory": 5.0,
             "memory_io": 500,
