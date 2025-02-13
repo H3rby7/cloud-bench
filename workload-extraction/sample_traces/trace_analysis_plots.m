@@ -2,6 +2,8 @@ function [] = trace_analysis_plots(input_data, yformat)
     y_limits = yformat{1};
     y_scale = yformat{2};
     
+    input_data.ts_minute = round(input_data.timestamp / (1000 * 60));
+
     % ************** Split graphs by cluster **************
     trace_count_by_group_by_minutes = groupcounts(input_data,["cluster","ts_minute"]);
     clusters = unique(input_data.cluster);
@@ -39,7 +41,7 @@ function [] = trace_analysis_plots(input_data, yformat)
             hold(active_plot, 'off');
             yscale(active_plot, y_scale);
             ylabel(active_plot, "Trace Count");
-            xlabel(active_plot, "Minute");
+            xlabel(active_plot, "Time in minutes");
             legend(active_plot, 'Location', 'bestoutside');
         end
     end
