@@ -6,7 +6,11 @@
       "muBench/examples/Alibaba/**/results": true
   },
   "yaml.schemas": {
-    "Kubernetes": "*.yaml",
-    "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-workflow.json": "workflows/*.yaml"
+    "Kubernetes": "yaml/**/*.yaml",
+    "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-workflow.json": "workflows/*.yaml",
+    "https://json.schemastore.org/helmfile.json": [
+      "**/chart/*.yaml",
+      "**/chart/templates/*.yaml"
+    ]
   }
 }
