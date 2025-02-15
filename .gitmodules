@@ -22,3 +22,6 @@
 [submodule "muBench-workmodel-gen"]
 	path = muBench-workmodel-gen
 	url = https://github.com/H3rby7/muBench-workmodel-gen.git
+[submodule "cloudlab-k8s-ee-sched-helm"]
+	path = cloudlab-k8s-ee-sched-helm
+	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched-helm.git
