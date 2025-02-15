@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: workmodel-params
+  name: {{ include "mychart.workmodelParamsCM" . }}
   labels:
+    {{- include "mychart.labels" . | nindent 4 }}
     benchmark: params
 data:
   WorkmodelParameters.json: |
@@ -23,25 +24,29 @@ data:
             "fileName":"workmodel.json"
           },
           "InternalService": {
-            "factor_cpu": 5.0,
-            "thread_pool_size": 1,
-            "trials": 1,
-            "factor_memory": 5.0,
-            "memory_io": 500,
-            "disk_write_block_count": 1000,
-            "disk_write_block_size": 1024,
+            {{- with .Values.benchmark.service_cell.loader }}
+            "factor_cpu": {{ .factor_cpu }},
+            "thread_pool_size": {{ .thread_pool_size }},
+            "trials": {{ .trials }},
+            "factor_memory": {{ .factor_memory }},
+            "memory_io": {{ .memory_io }},
+            "disk_write_block_count": {{ .disk_write_block_count }},
+            "disk_write_block_size": {{ .disk_write_block_size }},
             "tmp_file_name": "mubtestfile.txt",
-            "mean_response_size": 11
+            "mean_response_size": {{ .mean_response_size }}
+            {{- end }}
           },
           "Gunicorn": {
+            {{- with .Values.benchmark.service_cell.gunicorn }}
             "request_method": "rest",
-            "workers": 4,
-            "threads": 16
+            "workers": {{ .workers }},
+            "threads": {{ .threads }}
+            {{- end }}
           },
           "Kubernetes": {
-            "replicas": 1,
-            "base_cpu": 20,
-            "base_memory": 60
+            "replicas": {{ .Values.benchmark.service_cell.template.replicas }},
+            "base_cpu": {{ .Values.resources.service_cell.base_cpu }},
+            "base_memory": {{ .Values.resources.service_cell.base_memory }}
           }
       }
     }

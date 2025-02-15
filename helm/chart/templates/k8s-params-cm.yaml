@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "mychart.kubernetesParamsCM" . }}
   labels:
+    {{- include "mychart.labels" . | nindent 4 }}
     benchmark: params
 data:
   K8sParameters.json: |
@@ -12,12 +13,12 @@ data:
           "namespace": {{ .Values.benchmark.namespace | quote }},
           "image": {{ include "mychart.serviceCell.image" . | quote }},
           "cluster_domain": {{ .Values.benchmark.cluster_domain | quote }},
-          "path": "/api/v1",
+          "path": {{ .Values.benchmark.service_cell.api_path | quote }},
           "dns-resolver": {{ .Values.benchmark.dns_resolver | quote }},
           "scheduler-name": {{ .Values.benchmark.scheduler | quote }},
           "service-type": "ClusterIP",
-          "create-ingress": {{ .Values.benchmark.service_cell.ingress }},
-          "create-service-monitor": {{ .Values.benchmark.service_cell.service_monitor }}
+          "create-ingress": {{ .Values.benchmark.service_cell.template.ingress }},
+          "create-service-monitor": {{ .Values.benchmark.service_cell.template.service_monitor }}
       },
       "InternalServiceFilePath": "/InternalServiceFunctions",
       "OutputPath": "/podshared",

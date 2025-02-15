@@ -6,4 +6,4 @@ utilities to test helm and kubectl related commands locally within docker-compos
 
     docker-compose exec helm bash
 
-    helm template /chart -f example/my-values.yaml > generated/out.yaml
+    helm template /chart -f /example/my-values.yaml > /generated/out.yaml

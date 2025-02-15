@@ -2,7 +2,7 @@ services:
   helm:
     image: alpine/helm:3.16.4
     entrypoint: /bin/bash
-    working_dir: /test
+    working_dir: /
     tty: true
     volumes:
       - ./chart:/chart
