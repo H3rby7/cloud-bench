@@ -13,7 +13,7 @@ data:
           "image": "lujoka/mub-cell:0.1.1",
           "cluster_domain": "cluster",
           "path": "/api/v1",
-          "dns-resolver":"kube-dns.kube-system.svc.cluster.local",
+          "dns-resolver": "kube-dns.kube-system.svc.cluster.local",
           "scheduler-name": "default-scheduler",
           "service-type": "ClusterIP",
           "create-ingress": false,
