@@ -1,0 +1,10 @@
+services:
+  helm:
+    image: alpine/helm:3.16.4
+    entrypoint: /bin/bash
+    working_dir: /
+    tty: true
+    volumes:
+      - ./chart:/chart
+      - ./example:/example
+      - ./generated:/generated

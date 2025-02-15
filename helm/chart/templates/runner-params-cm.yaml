@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mychart.csvRunnerParamsCM" . }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+    benchmark: params
+data:
+  RunnerParameters.json: |
+    {
+      "RunnerParameters":{
+          "traces_file_path": "/dataset/traces.csv",
+          "deployment_ts_file_path": "/dataset/deployment_ts.csv",
+          "yaml_dir_path": "/podshared/yamls",
+          "k8s_namespace": {{ .Values.benchmark.namespace | quote }},
+          "deployments_headstart_in_s": {{ .Values.runner.deployment_headstart_seconds }},
+          "csv_files_delimiter": "\t",
+          "url_before_service": "http://",
+          "url_after_service": {{ include "mychart.serviceCell.fqdnSuffix" . | quote }},
+          "dry_run": false,
+          "thread_pool_size": {{ .Values.runner.threadpool_size }}
+      },
+      "in_cluster": true,
+      "OutputPath": "/result",
+      "ResultFilePrefix": "result",
+      "ttlMinutesAfterFinished": {{ .Values.runner.ttlMinutesAfterFinished }}
+    }
+
