@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mychart.kubernetesParamsCM" . }}
+  labels:
+    benchmark: params
+data:
+  K8sParameters.json: |
+    {
+      "K8sParameters": {
+          "prefix_yaml_file":"mubench",
+          "namespace": {{ .Values.benchmark.namespace | quote }},
+          "image": {{ include "mychart.serviceCell.image" . | quote }},
+          "cluster_domain": {{ .Values.benchmark.cluster_domain | quote }},
+          "path": "/api/v1",
+          "dns-resolver": {{ .Values.benchmark.dns_resolver | quote }},
+          "scheduler-name": {{ .Values.benchmark.scheduler | quote }},
+          "service-type": "ClusterIP",
+          "create-ingress": {{ .Values.benchmark.service_cell.ingress }},
+          "create-service-monitor": {{ .Values.benchmark.service_cell.service_monitor }}
+      },
+      "InternalServiceFilePath": "/InternalServiceFunctions",
+      "OutputPath": "/podshared",
+      "WorkModelPath": "/podshared/workmodel.json"
+    }

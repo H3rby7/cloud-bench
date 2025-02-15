@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+    benchmark: controller
+spec:
+  selector:
+    matchLabels:
+      benchmark: controller
+  podMetricsEndpoints:
+  - port: metrics
+    path: /
+    interval: 10s
