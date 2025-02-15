@@ -28,7 +28,7 @@ function [trace_location, trace_header_lines, output_dir_sequential, output_dir_
 
     % Service graph similarity threshold
     similarity_threshold = 0.9;
-    % Service graph clusters
+    % Service graph microservice clusters
     ms_cluster_count = 34;
 
     % *************** Sampling ***************
