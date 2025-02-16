@@ -1,5 +1,0 @@
-**/*
-!.gitignore
-!fetch.sh
-# We comment the line below (sample data) -> so it is shipped with GIT, but changes to it do not appear in GIT.
-#!sample_*.csv

@@ -1,11 +1,4 @@
 services:
-  alibaba-trace-v2018:
-    build:
-      dockerfile: ./wget.dockerfile
-    working_dir: /trace
-    entrypoint: /trace/fetch.sh
-    volumes:
-      - ./alibaba/2018:/trace
 
   alibaba-trace-ms-v2021:
     build:
