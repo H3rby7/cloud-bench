@@ -1,6 +1,3 @@
-[submodule "trace-generator"]
-	path = trace-generator
-	url = https://github.com/H3rby7/trace-generator
 [submodule "cloudlab-k8s-ee-sched"]
 	path = cloudlab-k8s-ee-sched
 	url = https://github.com/H3rby7/cloudlab-k8s-ee-sched
