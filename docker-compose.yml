@@ -1,0 +1,17 @@
+services:
+  profile:
+    build:
+      context: ./cloudlab-k8s-ee-sched
+      dockerfile_inline: |
+        FROM ubuntu:16.04
+        RUN apt-get update &&\
+            apt-get install -y python2.7 libxml2 libssl1.0.0 wget
+        RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py &&\
+            python2.7 get-pip.py
+        RUN pip install geni-lib
+
+    entrypoint: /bin/bash
+    working_dir: /profile
+    tty: true
+    volumes:
+      - ./cloudlab-k8s-ee-sched:/profile
